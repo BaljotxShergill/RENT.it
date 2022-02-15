@@ -46,6 +46,7 @@ header .logo {
   height: 30px;
   font-size: 17px;
   border: #fff;
+  color: white;
   border-style: dashed;
   border-radius: 30px;
   background: transparent;
@@ -105,6 +106,8 @@ header .logo {
   background: #111;
   transition: 0.5s;
   z-index: 2;
+  background-image: url("background.jpg");
+  background-size: cover;
 }
 .showcase.active {
   right: 300px;
