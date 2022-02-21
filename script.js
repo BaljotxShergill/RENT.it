@@ -11,6 +11,10 @@ function signup(){
     location.replace("SIGN UP.html");
 }
 
+function home(){
+    location.replace("HOME.html");
+}
+
 function includeHTML() {
     var z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */
