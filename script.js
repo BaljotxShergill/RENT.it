@@ -7,6 +7,10 @@ function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }
 
+function signup(){
+    location.replace("SIGN UP.html");
+}
+
 function includeHTML() {
     var z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */
