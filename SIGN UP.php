@@ -12,7 +12,7 @@
   <title>RENT.it</title>
   <style type="text/css">
     <?php
-    $css = file_get_contents('CSS/style2.css');
+    $css = file_get_contents('style2.css');
     echo $css;
     ?>
   </style>
@@ -36,28 +36,33 @@
       <p>Please fill in this form to create an account.</p>
 
       <div class="form-element">
-        <label for="email"><b>SURNAME</b></label>
-        <input type="text" placeholder="Enter Surname" name="email" required />
+        <label for="surname"><b>SURNAME</b></label>
+        <input type="text" placeholder="Enter Surname" name="surname" required />
       </div>
 
       <div class="form-element">
-        <label for="email"><b>FORENAME</b></label>
-        <input type="text" placeholder="Enter Forename" name="email" required />
+        <label for="forename"><b>FORENAME</b></label>
+        <input type="text" placeholder="Enter Forename" name="forename" required />
       </div>
 
       <div class="form-element">
-        <label for="email"><b>DATE OF BIRTH</b></label>
-        <input type="text" placeholder="Enter Date of Birth" name="email" required />
+        <label for="dob"><b>DATE OF BIRTH</b></label>
+        <input type="text" placeholder="Enter Date of Birth" name="dob" required />
       </div>
 
       <div class="form-element">
-        <label for="email"><b>HOME ADDRESS</ADDress></b></label>
-        <input type="text" placeholder="Enter Home Address" name="email" required />
+        <label for="address"><b>HOME ADDRESS</ADDress></b></label>
+        <input type="text" placeholder="Enter Home Address" name="address" required />
       </div>
 
       <div class="form-element">
-        <label for="email"><b>CONTACT NUMBER</b></label>
-        <input type="text" placeholder="Enter Contact Number " name="email" required />
+        <label for="number"><b>CONTACT NUMBER</b></label>
+        <input type="text" placeholder="Enter Contact Number " name="number" required />
+      </div>
+
+      <div class="form-element">
+        <label for="username"><b>USERNAME</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required />
       </div>
 
       <div class="form-element">
@@ -66,13 +71,13 @@
       </div>
 
       <div class="form-element">
-        <label for="psw"><b>PASSWORD</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required />
+        <label for="user_password"><b>PASSWORD</b></label>
+        <input type="password" placeholder="Enter Password" name="user_password" required />
       </div>
 
       <div class="form-element">
-        <label for="psw-repeat"><b>REPEAT PASSWORD</b></label>
-        <input type="password" placeholder="Repeat Password" name="psw-repeat" required />
+        <label for="password_r"><b>REPEAT PASSWORD</b></label>
+        <input type="password" placeholder="Repeat Password" name="password_r" required />
       </div>
 
       <div class="form-element">
@@ -92,14 +97,5 @@
     </div>
   </form>
 </body>
-
-<script>
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
-</script>
 
 </html>

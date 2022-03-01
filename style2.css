@@ -50,11 +50,10 @@ button:hover {
 
 /* Add padding to container elements */
 .container {
-  width: 80%;
-  display: block;
+  width: 65%;
   padding: 10px;
-  margin: 10%;
-  margin-top: 12%;
+  margin: auto;
+  margin-top: 21%;
   background-color: white;
   border-radius: 30px;
 }
@@ -76,7 +75,6 @@ button:hover {
 }
 
 .form-element {
-  display: flex;
   margin: auto;
   width: 90%;
   display: flex;

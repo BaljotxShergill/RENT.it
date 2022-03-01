@@ -23,26 +23,42 @@
         <li><a href="LEND.php">LEND</a></li>
         <li><a href="RENT.php">RENT</a></li>
         <li><a href="HELP.php">HELP</a></li>
-        <li style='float:right' class="username">
-            <?php
+        <?php
 
-            $admin = "admin";
-            if (isset($_SESSION)) {
-                if ($_SESSION["user"] == $admin) {
-                    echo $_SESSION["user"];
-                    echo "<li style='background:red'><a href='admin options.php'>Edit</a></li>";
-                    echo "</li><li style='float:right'><a class='active' href='logout.php'>Logout</a></li>";
-                } elseif ($_SESSION['user']) {
-                    echo $_SESSION["user"];
-                    echo "<button class='login' onclick='logout()'>LOGOUT</button>";
-                } else {
-                    echo "<button class='login' onclick='openForm()'>LOGIN</button>";
-                }
-            }
-            ?>
+        if (isset($_SESSION["user"])) {
+            $session_User = $_SESSION["user"];
+        } else {
+            $session_User = null;
+        }
+
+        $admin = "admin";
+        if ($session_User == $admin) {
+        ?>
+            <li>
+                <strong>
+                    ADMIN
+                </strong>
+            </li>
+        <?php
+            echo "<button class='login' onclick='logout()'>LOGOUT</button>";
+        } elseif ($session_User) {
+
+        ?>
+            <li style="color: white;">
+                Welcome,
+                <strong>
+                    <?php echo $session_User . '  '; ?>
+                </strong>
+                <?php echo "<button class='login' onclick='logout()'>LOGOUT</button>"; ?>
+            </li>
+        <?php
+        } else {
+            echo "<button class='login' onclick='openForm()'>LOGIN</button>";
+        }
+        ?>
         </li>
     </ul>
 
     </div>
 
-</html>l
+</html>

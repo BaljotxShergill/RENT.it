@@ -21,11 +21,11 @@
   <form action="" class="form-container">
     <img style="width: 20%; display: flex; margin: auto;" src="login icon.png">
 
-    <label for="email"><b>EMAIL</b></label>
-    <input name="username" type="text" placeholder="Enter Email" required>
+    <label for="username"><b>USERNAME</b></label>
+    <input name="username" type="text" placeholder="Enter Username" required>
 
-    <label for="psw"><b>PASSWORD</b></label>
-    <input name="password" type="password" placeholder="Enter Password" required>
+    <label for="password"><b>PASSWORD</b></label>
+    <input name="user_password" type="password" placeholder="Enter Password" required>
 
     <button type="submit" class="btn">LOGIN</button>
     <button type="button" class="btn cancel" onclick="closeForm()">CLOSE</button>
@@ -35,11 +35,16 @@
   </form>
 
   <?php
+  if (isset($_REQUEST["username"]) && isset($_REQUEST["user_password"])) {
+    $username_User = $_REQUEST["username"];
+    $password_User = $_REQUEST["user_password"];
+  } else {
+    $username_User = null;
+    $password_User = null;
+  }
   // Connect to server/database
   $mysqli = mysqli_connect("localhost", "2038383", "3411", "db2038383");
 
-  $username_User = $_REQUEST['username'];
-  $password_User = $_REQUEST['password'];
   if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
@@ -54,22 +59,9 @@
   $row = mysqli_fetch_array($res);
 
   if ($row) {
-    echo "Welcome...You are logged in";
-
-
-    $_SESSION["user"] = $row['user_email'];
+    $_SESSION["user"] = $row['forename'];
   } elseif ($username_User && $password_User) {
     echo "Error!...Try again";
-
-    trigger_error("failed login attempt");
-  }
-
-  // How many rows were returned?
-  echo ("<p>" . mysqli_num_rows($res) . " record(s) were returned...</p>");
-
-  // Loop through resultset and display each field's value
-  while ($row = mysqli_fetch_assoc($res)) {
-    echo $row['username'] . " - " . $row['user_password'] . "<br>";
   }
   ?>
 
