@@ -48,7 +48,8 @@
         </div>
 
         <?php
-        $mysqli = mysqli_connect("localhost", "2038383", "3411", "db2038383");
+        // Connect to server/database
+        include("database.php");
         ?>
         <form class="products" action="PRODUCT PAGE.php" method="get">
             <table class="tblproducts">
@@ -60,15 +61,15 @@
                         <td>
                             <?php if ($row['image_url_1']) {
                             ?>
-                                <?php echo "<img id='pimg' src=" . $row['image_url_1'] . " height=200px>"; ?>
+                                <?php echo "<img id='pimg' src=" . $row['image_url_1'] . " >"; ?>
                             <?php
                             } ?>
                         </td>
                         <td><?php echo $row['provision_title']; ?></td>
                         <td><?php echo $row['provision_description']; ?></td>
                         <td><?php echo $row['rate'], "  ", $row['rate_unit_type']; ?></td>
-                        <td><button id="btnview" style="width: auto;" type="submit"><span>VIEW </span></button>
-                            <input type="hidden" name="productId" value=<?php echo $row['provision_id']; ?> />
+                        <td>
+                            <button id="btnview" style="width: auto;" type="submit" name="productId" value=<?php echo $row['provision_id']; ?>><span>VIEW </span></button>
                         </td>
                     </tr>
 

@@ -18,7 +18,7 @@
     session_start();
   }
   ?>
-  <form action="" class="form-container">
+  <form action="index.php" class="form-container" method="post">
     <img style="width: 20%; display: flex; margin: auto;" src="login icon.png">
 
     <label for="username"><b>USERNAME</b></label>
@@ -43,19 +43,10 @@
     $password_User = null;
   }
   // Connect to server/database
-  $mysqli = mysqli_connect("localhost", "2038383", "3411", "db2038383");
+  include("database.php");
 
-  if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
   // Run SQL query
   $res = mysqli_query($mysqli, "SELECT * FROM USERS WHERE username='$username_User' AND user_password='$password_User'");
-  // Are there any errors in my SQL statement?
-  if (!$res) {
-    print("MySQL error: " . mysqli_error($mysqli));
-    exit;
-  }
-
   $row = mysqli_fetch_array($res);
 
   if ($row) {

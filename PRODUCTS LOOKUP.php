@@ -48,7 +48,8 @@
         </div>
 
         <?php
-        $mysqli = mysqli_connect("localhost", "2038383", "3411", "db2038383");
+        // Connect to server/database
+        include("database.php");
         if (isset($_REQUEST['search'])) {
             $search = $_REQUEST['search'];
         } else {
@@ -60,6 +61,7 @@
             $result = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_title LIKE '%$search%' "); ?>
             <form class="products" action="PRODUCT PAGE.php" method="get">
                 <table class="tblproducts">
+                    <h1 class="searchres">Showing result for: <?php echo $search; ?></h1>
                     <?php
                     if (mysqli_fetch_array($result) == 0) {
                     ?>
@@ -70,19 +72,18 @@
                         while ($row = mysqli_fetch_array($result)) {
                         ?>
                             <tr>
-                                <h1 class="searchres">Showing result for: <?php echo $search; ?></h1>
                                 <td>
                                     <?php if ($row['image_url_1']) {
                                     ?>
-                                        <?php echo "<img id='pimg' src=" . $row['image_url_1'] . " height=200px>"; ?>
+                                        <?php echo "<img id='pimg' src=" . $row['image_url_1'] . ">"; ?>
                                     <?php
                                     } ?>
                                 </td>
                                 <td><?php echo $row['provision_title']; ?></td>
                                 <td><?php echo $row['provision_description']; ?></td>
                                 <td><?php echo $row['rate'], "  ", $row['rate_unit_type']; ?></td>
-                                <td><button id="btnview" style="width: auto;" type="submit"><span>VIEW </span></button>
-                                    <input type="hidden" name="productId" value=<?php print $row['provision_id']; ?> />
+                                <td>
+                                    <button id="btnview" style="width: auto;" type="submit" name="productId" value=<?php echo $row['provision_id']; ?>><span>VIEW </span></button>
                                 </td>
                             </tr>
                 <?php

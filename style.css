@@ -44,7 +44,7 @@ header {
 }
 
 .navbar {
-  width: 85%;
+  width: 100%;
   margin: auto;
   padding: 35x 0;
   display: flex;
@@ -141,12 +141,13 @@ header {
 }
 
 .products {
+  margin-top: 9em;
   margin-left: auto;
   margin-right: auto;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
   padding: 50px;
-  width: 80%;
+  width: 70%;
   color: black;
 }
 .tblproducts {
@@ -157,7 +158,10 @@ header {
 }
 .tblproducts td {
   border-radius: 15px;
-  padding: 2em;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
 }
 
 .tblproducts tr:hover {
@@ -166,6 +170,9 @@ header {
 
 #pimg {
   border-radius: 10px;
+  display: flex;
+  margin-right: auto;
+  width: 15em;
 }
 
 .searchres {
@@ -250,6 +257,7 @@ header {
 }
 
 h1 {
+  padding-right: inherit;
   font-size: 2em;
   font-weight: 800;
   color: #fff;
@@ -403,7 +411,138 @@ input {
 .open-button:hover {
   opacity: 1;
 }
+/* --------------------------------- PRODUCT PAGE -------------------------------------------- */
+.row {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 3em;
+}
 
+.column {
+  flex: 50;
+}
+
+.all-images {
+  height: 40vh;
+  width: auto;
+  display: flex;
+}
+
+.small-images {
+  display: flex;
+  flex-direction: column;
+}
+
+.small-images img {
+  border-radius: 15px;
+  height: 10vh;
+  width: auto;
+  margin-bottom: 9px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.small-images img:hover {
+  opacity: 1;
+}
+
+.main-images img {
+  border-radius: 15px;
+  margin-left: 1em;
+  height: 100%;
+  margin-right: 3em;
+}
+
+.brand {
+  background-color: #008000;
+  width: fit-content;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 5px;
+}
+
+.price {
+  color: rgb(29, 28, 28);
+  font-size: 26px;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+.price-box {
+  display: flex;
+  align-items: center;
+}
+
+.buy {
+  background-color: rgb(201, 97, 57);
+}
+
+.column .btn {
+  background-color: #000000;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  border-radius: 15px;
+  display: flex;
+}
+
+.column h1 {
+  color: black;
+  text-transform: uppercase;
+  padding-bottom: 1em;
+  font-size: 3em;
+}
+.column h2 {
+  color: black;
+  font-size: 1em;
+}
+
+.column h3 {
+  padding: 1em;
+}
+
+.column .fa {
+  padding: 1em;
+}
+
+.card {
+  padding: 1em;
+  border-radius: 15px;
+  background: black;
+}
+.card #pimg {
+  border-radius: 10px;
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  width: 15em;
+}
+
+.card h1 {
+  padding: 1em;
+  font-size: 0.8em;
+}
+
+.card .rent {
+  background-color: #ffffff;
+  color: black;
+  padding: 15px 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* -------------------------------------- MEDIA -------------------------------------------------- */
 @media (max-width: 1200px) {
   .showcase,
   .showcase header {

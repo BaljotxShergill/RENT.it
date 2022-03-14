@@ -48,7 +48,8 @@
         </div>
 
         <?php
-        $mysqli = mysqli_connect("localhost", "2038383", "3411", "db2038383");
+        // Connect to server/database
+        include("database.php");
         if (isset($_GET['productId'])) {
             $search = $_GET['productId'];
         } else {
@@ -56,59 +57,103 @@
         }
         ?>
         <form class="products" action="" method="get">
-            <table class="tblproducts">
-                <?php
-                $result = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id LIKE $search ");
-                while ($row = mysqli_fetch_array($result)) {
-                ?>
-                    <tr>
-                        <td>
+            <?php
+            $result = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id LIKE $search ");
+            while ($row = mysqli_fetch_array($result)) {
+            ?>
+                <div class="row">
+                    <div class="column">
+
+                        <div class="product-box">
+                            <div class="all-images">
+                                <div class="small-images">
+                                    <?php if ($row['image_url_2']) {
+                                    ?>
+                                        <?php echo "<img  onclick='clickimg(this)' src=" . $row['image_url_2'] . " >"; ?>
+                                    <?php
+                                    } ?>
+                                    <?php if ($row['image_url_3']) {
+                                    ?>
+                                        <?php echo "<img onclick='clickimg(this)' src=" . $row['image_url_3'] . " >"; ?>
+                                    <?php
+                                    } ?>
+                                    <?php if ($row['image_url_4']) {
+                                    ?>
+                                        <?php echo "<img  onclick='clickimg(this)' src=" . $row['image_url_4'] . " >"; ?>
+                                    <?php
+                                    } ?>
+                                    <?php if ($row['image_url_5']) {
+                                    ?>
+                                        <?php echo "<img  onclick='clickimg(this)' src=" . $row['image_url_5'] . " >"; ?>
+                                    <?php
+                                    } ?>
+                                </div>
+                                <div class="main-images">
+                                    <?php if ($row['image_url_1']) {
+                                    ?>
+                                        <?php echo "<img id='imagebox' src=" . $row['image_url_1'] . " >"; ?>
+                                    <?php
+                                    } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h1><?php echo $row['provision_title']; ?></h1>
+                        <h2><?php echo $row['provision_description']; ?></h2>
+
+                        <div class="price-box">
+                            <p class="price">&#163; <?php echo $row['rate'], "  ", $row['rate_unit_type']; ?></p>
+                            <strike>&#163; <?php echo $row['rate'] + rand(0, 10), "  ", $row['rate_unit_type']; ?></strike>
+                        </div>
+
+                        <button class="btn rent">
+                            <span class="fa fa-shopping-cart">
+                            </span>
+                            <h3>RENT NOW</h3>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <h1>EXPLORE MORE PRODUCTS</h1>
+                </div>
+                <div class="row">
+
+                    <?php
+                    $result = mysqli_query($mysqli, "SELECT * FROM PROVISION");
+                    $row = mysqli_fetch_array($result);
+                    while ($row < 5) {
+                    ?>
+                        <div class="card">
                             <?php if ($row['image_url_1']) {
                             ?>
-                                <?php echo "<img id='pimg' src=" . $row['image_url_1'] . " height=400px>"; ?>
+                                <?php echo "<img id='pimg' src=" . $row['image_url_1'] . " >"; ?>
                             <?php
                             } ?>
-                        </td>
-                        <td>
-                            <?php if ($row['image_url_2']) {
-                            ?>
-                                <?php echo "<img id='pimg' src=" . $row['image_url_2'] . " height=400px>"; ?>
-                            <?php
-                            } ?>
-                        </td>
-                        <td>
-                            <?php if ($row['image_url_3']) {
-                            ?>
-                                <?php echo "<img id='pimg' src=" . $row['image_url_3'] . " height=400px>"; ?>
-                            <?php
-                            } ?>
-                        </td>
-                        <td>
-                            <?php if ($row['image_url_4']) {
-                            ?>
-                                <?php echo "<img id='pimg' src=" . $row['image_url_4'] . " height=400px>"; ?>
-                            <?php
-                            } ?>
-                        </td>
-                        <td>
-                            <?php if ($row['image_url_5']) {
-                            ?>
-                                <?php echo "<img id='pimg' src=" . $row['image_url_5'] . " height=400px>"; ?>
-                            <?php
-                            } ?>
-                        </td>
-                        <td><?php echo $row['provision_title']; ?></td>
-                        <td><?php echo $row['provision_description']; ?></td>
-                        <td><?php echo $row['rate'], "  ", $row['rate_unit_type']; ?></td>
-                        <td><button id="btnview" style="width: auto;" type="submit"><span>VIEW </span></button>
-                            <input type=hidden name=pid value=<?php print $row['provision_id']; ?> />
-                        </td>
-                    </tr>
+                            <h1><?php echo $row['provision_title']; ?></h1>
+                            <button class="btn rent">
+                                <span class="fa fa-shopping-cart">
+                                </span>
+                                <h3>RENT NOW</h3>
+                            </button>
+                        </div>
 
-                <?php
+                    <?php
+                    }
+                    ?>
+
+
+                </div>
+            <?php
+            }
+            ?>
+            <script>
+                function clickimg(smallImg) {
+                    var fullImg = document.getElementById("imagebox")
+                    fullImg.src = smallImg.src
                 }
-                ?>
-            </table>
+            </script>
         </form>
     </body>
 
