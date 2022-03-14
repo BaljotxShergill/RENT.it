@@ -15,9 +15,9 @@
     }
     ?>
     <div class="searchbar">
-        <input type="text" placeholder="start typing to search...">
-        <i class="fa fa-search"></i>
+        <?php include("searchbar.php") ?>
     </div>
+
     <ul>
         <li><a href="index.php">HOME</a></li>
         <li><a href="LEND.php">LEND</a></li>

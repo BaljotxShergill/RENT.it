@@ -24,7 +24,6 @@
 
 
     <body>
-
         <?php
         if (!isset($_SESSION)) {
             session_start();
@@ -36,10 +35,12 @@
             ?>
         </div>
 
+        <video src="video.mp4" muted loop autoplay></video>
         <div class="text">
             <h3>IF YOU CAN'T BUY IT </h3>
             <h2>RENT.it</h2>
-            <a href="PRODUCTS.php">Explore More</a>
+            <p>Place where Lend_Rent_Sell</p>
+            <a href="PRODUCTS.html">Explore</a>
         </div>
     </body>
 

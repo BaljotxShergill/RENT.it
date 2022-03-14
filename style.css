@@ -19,15 +19,11 @@ header {
 
 .showcase {
   position: absolute;
-  right: 0;
   width: 100%;
   min-height: 100vh;
-  padding: 100px;
-  padding-left: 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: #111;
+  background: #000000;
   transition: 0.5s;
   z-index: 2;
   background-image: url("background.jpg");
@@ -61,26 +57,56 @@ header {
   background: rgba(255, 255, 255, 0.2);
   display: flex;
   border-radius: 60px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   backdrop-filter: blur(4px) saturate(180%);
 }
-.searchbar input[type="text"] {
+.frmSearch {
+  width: 100%;
+}
+.frmSearch input[type="text"] {
+  background: transparent;
+  flex: 1;
+  border: 0;
+  width: 80%;
+  padding-left: 1em;
+  outline: none;
+  font-size: 15px;
+  color: #ffffff94;
+}
+
+.frmSearch input[type="reset"] {
   background: transparent;
   flex: 1;
   border: 0;
   outline: none;
-  padding: 5px 15px;
-  font-size: 15px;
-  color: #cac7ff;
+  padding-right: 10px;
+  font-size: 1px;
+  color: #ffffff;
 }
 
-.searchbar ::placeholder {
+.frmSearch ::placeholder {
   color: white;
 }
-.searchbar i {
-  position: relative;
-  font-size: 30px;
-  color: white;
+
+.frmSearch .btnSearch {
+  position: absolute;
+  right: 4em;
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.frmSearch .btnReset {
+  position: absolute;
+  right: 1em;
+  top: 15px;
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-size: 15px;
+  color: #ffffff;
 }
 
 .navbar ul li {
@@ -112,6 +138,80 @@ header {
 
 .navbar ul li:hover::after {
   width: 100%;
+}
+
+.products {
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  padding: 50px;
+  width: 80%;
+  color: black;
+}
+.tblproducts {
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.tblproducts td {
+  border-radius: 15px;
+  padding: 2em;
+}
+
+.tblproducts tr:hover {
+  background-color: #ddddddb8;
+}
+
+#pimg {
+  border-radius: 10px;
+}
+
+.searchres {
+  font-size: 2em;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+  line-height: 1em;
+  text-transform: uppercase;
+}
+
+#btnview {
+  border-radius: 4px;
+  background-color: #000000;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  padding: 1em 2em 1em 2em;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+#btnview span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#btnview span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#btnview:hover span {
+  padding-right: 25px;
+}
+
+#btnview:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 
 .login {
@@ -176,6 +276,7 @@ input {
   color: black;
   line-height: 1em;
 }
+
 .text h2 {
   font-size: 5em;
   font-weight: 800;
@@ -214,8 +315,9 @@ input {
 }
 .social {
   position: absolute;
+  padding: 10px;
   z-index: 10;
-  bottom: 20px;
+  bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
