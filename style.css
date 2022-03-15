@@ -146,8 +146,8 @@ header {
   margin-right: auto;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
-  padding: 50px;
-  width: 70%;
+  padding: 3em;
+  width: 90%;
   color: black;
 }
 .tblproducts {
@@ -343,7 +343,7 @@ input {
 .social li a:hover {
   transform: scale(0.5) translateY(-15px);
 }
-
+/* --------------------------------- LOGIN POP UP -------------- */
 /* The popup form - hidden by default */
 .form-popup {
   display: none;
@@ -355,7 +355,7 @@ input {
   backdrop-filter: blur(10px) saturate(180%);
 }
 
-/* Add styles to the form container */
+/* Add styles to the form container-row */
 .form-container {
   position: relative;
   display: block;
@@ -418,11 +418,11 @@ input {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  padding: 3em;
 }
 
 .column {
   flex: 50;
+  margin-left: 1em;
 }
 
 .all-images {
@@ -516,13 +516,17 @@ input {
   padding: 1em;
   border-radius: 15px;
   background: black;
+  height: 21em;
+  max-height: 21em;
+  margin: 1em;
 }
 .card #pimg {
   border-radius: 10px;
   display: flex;
   margin-right: auto;
   margin-left: auto;
-  width: 15em;
+  width: 11em;
+  max-width: 11em;
 }
 
 .card h1 {
@@ -530,7 +534,7 @@ input {
   font-size: 0.8em;
 }
 
-.card .rent {
+.card .view {
   background-color: #ffffff;
   color: black;
   padding: 15px 18px;
@@ -538,8 +542,114 @@ input {
   cursor: pointer;
   border-radius: 15px;
   display: flex;
-  margin-right: auto;
   margin-left: auto;
+  margin-right: auto;
+}
+/* --------------------------- SIGN UP -------------------------------------- */
+.signup {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  padding-top: 7em;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px) saturate(180%);
+}
+
+.container-col {
+  float: left;
+  width: 50%;
+}
+
+/* Full-width input fields */
+.container-row input[type="text"],
+.container-row input[type="password"],
+.container-row input[type="date"] {
+  width: 100%;
+  padding: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  background: #f1f1f1;
+  border-radius: 15px;
+}
+
+/* Add a background color when the inputs get focus */
+.container-row input[type="text"]:focus,
+.container-row input[type="password"]:focus,
+.container-row input[type="date"]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.container-row button:hover {
+  opacity: 1;
+}
+
+/* Add padding to container-row elements */
+.container-row {
+  width: 80%;
+  padding: 10px;
+  margin: auto;
+  background-color: white;
+  border-radius: 30px;
+}
+
+/* Set a style for the submit/login button */
+.container-row .btn {
+  background-color: #000000;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.8;
+  border-radius: 15px;
+}
+
+.container-row .cancel {
+  background-color: rgba(255, 0, 0, 0.849);
+}
+
+.account {
+  width: 100%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  padding: inherit;
+  align-items: center;
+}
+
+.account select {
+  padding: 15px;
+  border: none;
+  background: #f1f1f1;
+  border-radius: 15px;
+  margin-left: 1em;
+}
+
+.form-element {
+  margin: auto;
+  width: 90%;
+  display: flex;
+  padding: 0.5em;
+}
+
+.form-element label {
+  display: flex;
+  margin: auto;
+  width: 30%;
+}
+
+.form-element input {
+  width: 70%;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
 }
 
 /* -------------------------------------- MEDIA -------------------------------------------------- */

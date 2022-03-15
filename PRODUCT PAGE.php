@@ -115,15 +115,26 @@
 
                     </div>
                 </div>
-                <div class="row">
-                    <h1>EXPLORE MORE PRODUCTS</h1>
-                </div>
+                <h1 style="  
+                color: black;
+                text-transform: uppercase;
+                font-size: 3em;
+                display: flex;
+                margin-left: auto;
+                margin-right: auto;
+                align-content: flex-start;
+                justify-content: center;
+                margin-top: inherit;">
+                    EXPLORE MORE PRODUCTS
+                </h1>
                 <div class="row">
 
                     <?php
-                    $result = mysqli_query($mysqli, "SELECT * FROM PROVISION");
-                    $row = mysqli_fetch_array($result);
-                    while ($row < 5) {
+                    $max = mysqli_query($mysqli, "SELECT * FROM PROVISION");
+                    $max = mysqli_num_rows($max);
+                    $rand = rand(0, $max);
+                    $result = mysqli_query($mysqli, "SELECT * FROM PROVISION LIMIT 4 OFFSET $rand");
+                    while ($row = mysqli_fetch_array($result)) {
                     ?>
                         <div class="card">
                             <?php if ($row['image_url_1']) {
@@ -132,10 +143,8 @@
                             <?php
                             } ?>
                             <h1><?php echo $row['provision_title']; ?></h1>
-                            <button class="btn rent">
-                                <span class="fa fa-shopping-cart">
-                                </span>
-                                <h3>RENT NOW</h3>
+                            <button class="btn view" type="submit" value=<?php echo $row['provision_id']; ?>>
+                                <h3>VIEW NOW</h3>
                             </button>
                         </div>
 
@@ -148,12 +157,7 @@
             <?php
             }
             ?>
-            <script>
-                function clickimg(smallImg) {
-                    var fullImg = document.getElementById("imagebox")
-                    fullImg.src = smallImg.src
-                }
-            </script>
+
         </form>
     </body>
 
