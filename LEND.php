@@ -36,11 +36,85 @@
             ?>
         </div>
 
-        <div class="text">
-            <h3>IF YOU CAN'T BUY IT </h3>
-            <h2>RENT.it</h2>
-            <a href="PRODUCTS.php">Explore More</a>
-        </div>
+        <form class="form" action="" style="border: 1px solid #ccc" method="POST">
+            <div class="container-row">
+                <div class="container-col">
+                    <div class="form-element">
+                        <label for="provision_title"><b>PRODUCT NAME</b></label>
+                        <input type="text" placeholder="Enter name of the product" name="provision_title" required />
+                    </div>
+
+                    <div class="form-element">
+                        <label for="provision_description"><b>PRODUCT DESCRIPTION</b></label>
+                        <input type="text" placeholder="Enter product description" name="provision_description" required />
+                    </div>
+
+                    <div class="form-element" style="height:10em;">
+                        <label for="provision_address"><b>PRODUCT ADDRESS</b></label>
+                        <input type="text" placeholder="Enter where the product is located" name="provision_address" required />
+                    </div>
+                </div>
+
+                <div class="container-col">
+                    <div class="form-element">
+                        <label for="rate"><b>RATE (£)</b></label>
+                        <input type="text" placeholder="Enter product cost" name="rate" required />
+                    </div>
+
+                    <div class="selectList">
+                        <label for="rate_unit_type">RATE PERIOD </label>
+                        <select placeholder="Select rate period" name="rate_unit_type">
+                            <option value="PER DAY">PER DAY</option>
+                            <option value="PER HOUR">PER HOUR</option>
+                            <option value="PER SHEET">PER SHEET</option>
+                        </select>
+                    </div>
+
+                    <div class="selectList">
+                        <label for="provision_type">PRODUCT TYPE</label>
+                        <select placeholder="Select product type" name="provision_type">
+                            <option value="RENT">RENT</option>
+                            <option value="SERVICE">SERVICE</option>
+                        </select>
+                    </div>
+
+                    <div class="selectList">
+                        <label for="available">AVAILABLE </label>
+                        <select placeholder="Select avalaibility" name="available">
+                            <option value="YES">YES</option>
+                            <option value="NO">NO</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="container-row">
+                    <div class="uploadImg">
+                        <label for=" available">SELECT IMAGE FILE TO UPLOAD: </label>
+                        <input type="file" name="file">
+                        <input type="file" name="file">
+                        <input type="file" name="file">
+                        <input type="file" name="file">
+                        <input type="file" name="file">
+                        <input type="submit" class="btn" name="submit" value="Upload">
+                    </div>
+
+                    <div class="form-element">
+                        <button type="button" class="btn cancel" onclick="home()">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn">UPLOAD</button>
+                    </div>
+                </div>
+            </div>
+
+            <?php
+            include("database.php");
+
+
+            ?>
+            </div>
+        </form>
+
     </body>
 
     <ul class="social">

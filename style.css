@@ -546,7 +546,7 @@ input {
   margin-right: auto;
 }
 /* --------------------------- SIGN UP -------------------------------------- */
-.signup {
+.form {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -564,7 +564,8 @@ input {
 /* Full-width input fields */
 .container-row input[type="text"],
 .container-row input[type="password"],
-.container-row input[type="date"] {
+.container-row input[type="date"],
+.container-row select {
   width: 100%;
   padding: 15px;
   margin-left: auto;
@@ -577,7 +578,8 @@ input {
 /* Add a background color when the inputs get focus */
 .container-row input[type="text"]:focus,
 .container-row input[type="password"]:focus,
-.container-row input[type="date"]:focus {
+.container-row input[type="date"]:focus,
+.container-row select:focus {
   background-color: #ddd;
   outline: none;
 }
@@ -611,7 +613,7 @@ input {
   background-color: rgba(255, 0, 0, 0.849);
 }
 
-.account {
+.accountList {
   width: 100%;
   display: flex;
   margin-left: auto;
@@ -621,8 +623,25 @@ input {
   align-items: center;
 }
 
-.account select {
+.accountList select {
   padding: 15px;
+  border: none;
+  background: #f1f1f1;
+  border-radius: 15px;
+  margin-left: 1em;
+}
+
+.selectList {
+  width: 90%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5em;
+}
+
+.selectList select {
+  padding: 15px;
+  width: 70%;
   border: none;
   background: #f1f1f1;
   border-radius: 15px;
@@ -636,14 +655,39 @@ input {
   padding: 0.5em;
 }
 
-.form-element label {
+.form-element label,
+.selectList label {
   display: flex;
   margin: auto;
   width: 30%;
+  margin-right: 1em;
 }
 
 .form-element input {
   width: 70%;
+}
+
+.uploadImg {
+  display: grid;
+  margin: auto;
+  width: 100%;
+  justify-items: center;
+  justify-content: center;
+}
+.uploadImg input[type="file"] {
+  width: 100%;
+  padding: 0.5em;
+  border: none;
+  border-radius: 15px;
+}
+
+.uploadImg input[type="file"]:hover {
+  background-color: #ddd;
+  outline: none;
+}
+
+.uploadImg .btn {
+  background-color: #4daa57;
 }
 
 .close:hover,

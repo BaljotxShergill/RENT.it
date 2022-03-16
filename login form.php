@@ -31,7 +31,6 @@
     <button type="button" class="btn cancel" onclick="closeForm()">CLOSE</button>
     <h4 style="text-align:center">- OR -</h4>
     <button type="button" class="btn create" onclick="signup()">SIGN UP</button>
-
   </form>
 
   <?php

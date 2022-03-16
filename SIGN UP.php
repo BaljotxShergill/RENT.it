@@ -28,15 +28,15 @@
       session_start();
     }
     ?>
-    <form class="signup" action="index.php" style="border: 1px solid #ccc" method="POST">
+    <form class="form" action="index.php" style="border: 1px solid #ccc" method="POST">
       <div class="container-row">
         <h1 style="display: flex;  color: black">
           CREATE AN ACCOUNT
         </h1>
         <p>Please fill in this form to create an account.</p>
-        <div class="account">
-          <label for="account_type">ACCOUNT TYPE:</label>
-          <select placeholder="select account type..." name="account_type">
+        <div class="accountList">
+          <label for="account_type">ACCOUNT TYPE</label>
+          <select placeholder="Select account type..." name="account_type">
             <option value="CONSUMER">STANTARD ACCOUNT</option>
             <option value="PROVIDER">RENTER ACCOUNT</option>
           </select>
