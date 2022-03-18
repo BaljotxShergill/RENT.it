@@ -7,12 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" />
   <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <script src="script.js"></script>
   <title>RENT.it</title>
 </head>
 <section class="showcase">
 
   <header>
+    <?php
+    if (!isset($_SESSION)) {
+      session_start();
+    }
+    ?>
     <h1>RENT.it</h1>
 
     <div class="navbar">
@@ -23,12 +29,7 @@
   </header>
 
   <body>
-    <?php
-    if (!isset($_SESSION)) {
-      session_start();
-    }
-    ?>
-    <form class="form" action="index.php" style="border: 1px solid #ccc" method="POST">
+    <form class="form" action="index.php" style="border: 1px solid #ccc" method="post">
       <div class="container-row">
         <h1 style="display: flex;  color: black">
           CREATE AN ACCOUNT
@@ -122,7 +123,7 @@
       ) {
         $surname = $_REQUEST['surname'];
         $forename = $_REQUEST['forename'];
-        $dob = $_REQUEST['dob'];
+        $dob = date('Y-m-d', strtotime($_REQUEST['dob']));
         $contact_number = $_REQUEST['contact_number'];
         $home_address = $_REQUEST['home_address'];
         $username = $_REQUEST['username'];
@@ -132,7 +133,7 @@
       } else {
         $surname = null;
         $forename = null;
-        $dob = null;
+        $dob = date("Y-m-d");
         $contact_number = null;
         $home_address = null;
         $username = null;
@@ -141,13 +142,12 @@
         $account_type = null;
       }
 
-      $result = mysqli_query($mysqli, "SELECT * FROM USERS WHERE username='$username'");
+      $result = mysqli_query($mysqli, "SELECT * FROM USERS WHERE username='$username' OR user_email='$user_email'");
 
-      if (mysqli_fetch_array($result)) {
-        echo "USERNAME ALREADY EXISTS< PLEASE TRY AGAIN";
-      } elseif ($username) {
-        mysqli_query($mysqli, "INSERT INTO USERS(surname,forename, dob, contact_number, home_address, username, user_password, user_email, creation_date, account_type) 
-        VALUES('$surname','$forename','$dob','$contact_number','$home_address','$username','$user_password','$user_email', NOW() , '$account_type')");
+      if ($result->num_rows >= 1) {
+        print("<script>window.alert('USERNAME ALREADY EXISTS, PLEASE TRY AGAIN');</script>");
+      } else {
+        mysqli_query($mysqli, "INSERT INTO USERS(surname,forename, dob, contact_number, home_address, username, user_password, user_email, creation_date, account_type) VALUES('$surname','$forename', '$dob','$contact_number','$home_address','$username','$user_password','$user_email', NOW() , '$account_type')");
         print("<script>window.alert('ACCOUNT CREATED');</script>");
       }
 

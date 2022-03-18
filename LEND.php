@@ -7,12 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <script src="script.js"></script>
     <title>RENT.it</title>
 </head>
 
 <section class="showcase">
     <header>
+        <?php
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        if (!isset($_SESSION['user'])) {
+            header("Location:login form.php");
+        }
+        ?>
         <h1>RENT.it</h1>
 
         <div class="navbar">
@@ -24,19 +33,13 @@
 
 
     <body>
-
-        <?php
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-        ?>
         <div class="form-popup" id="myForm">
             <?php
             include("login form.php");
             ?>
         </div>
 
-        <form class="form" action="" style="border: 1px solid #ccc" method="POST">
+        <form class="form" action="LEND.php" style="border: 1px solid #ccc" method="post">
             <div class="container-row">
                 <div class="container-col">
                     <div class="form-element">
