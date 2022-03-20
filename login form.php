@@ -45,9 +45,10 @@
   if (isset($_REQUEST['submit'])) {
     // Run SQL query
     $res = mysqli_query($mysqli, "SELECT * FROM USERS WHERE username='$username_User' AND user_password='$password_User'");
-
+    $row = mysqli_fetch_array($res);
     if ($res->num_rows == 1) {
       $_SESSION['user'] = $username_User;
+      $_SESSION['user_id'] = $row['user_id'];
       header('Location: index.php');
     } elseif ($username_User && $password_User) {
       echo ("<script>window.alert('USERNAME OR PASSWORD INCORRECT, PLEASE TRY AGAIN.');</script>");

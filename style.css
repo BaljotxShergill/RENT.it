@@ -538,8 +538,8 @@ input {
 /* --------------------------- SIGN UP -------------------------------------- */
 .form {
   position: absolute;
-  width: 100%;
-  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
   z-index: 100;
   padding-top: 7em;
   background: rgba(255, 255, 255, 0.2);
