@@ -1,6 +1,4 @@
 # RENT.it
-Project Files
-
 /// <br />
 TEAM MEMBERS:<br />
 2011690 - Baljot Singh - Project Manager <br />
