@@ -2,7 +2,7 @@
 Project Files
 
 /// <br />
-TEAM MEMBERS:
+TEAM MEMBERS:<br />
 2011690 - Baljot Singh - Project Manager <br />
 2038383 - Kirandeep Rai - Database Analyst <br />
 2036948 - Tracy Wordui - Business Analyst <br />
