@@ -63,13 +63,14 @@
                                 <td>
                                     <?php if ($row['image_url_1']) {
                                     ?>
-                                        <?php echo "<img id='pimg' src=" . $row['image_url_1'] . ">"; ?>
+                                        <?php $imageURL = 'image/' . $row["image_url_1"]; ?>
+                                        <img id='listimg' src="<?php echo $imageURL; ?>" alt="" />
                                     <?php
                                     } ?>
                                 </td>
                                 <td><?php echo $row['provision_title']; ?></td>
                                 <td><?php echo $row['provision_description']; ?></td>
-                                <td><?php echo $row['rate'], "  ", $row['rate_unit_type']; ?></td>
+                                <td style="width: 15%;"><?php echo "£" . $row['rate'], "  ", $row['rate_unit_type']; ?></td>
                                 <td>
                                     <button id="btnview" style="width: auto;" type="submit" name="productId" value=<?php echo $row['provision_id']; ?>><span>VIEW </span></button>
                                 </td>

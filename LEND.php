@@ -39,7 +39,7 @@
             ?>
         </div>
 
-        <form class="form" action="" style="border: 1px solid #ccc" method="post">
+        <form class="form" action="LEND.php" style="border: 1px solid #ccc" method="post" enctype="multipart/form-data">
             <div class="container-row">
                 <div class="container-col">
                     <div class="form-element">
@@ -83,7 +83,7 @@
 
                     <div class="selectList">
                         <label for="available">AVAILABLE </label>
-                        <select placeholder="Select avalaibility" name="available">
+                        <select placeholder="Select avalaibility" name="available" required>
                             <option value="YES">YES</option>
                             <option value="NO">NO</option>
                         </select>
@@ -92,15 +92,16 @@
 
                 <div class="container-row">
                     <div class="uploadImg">
-                        <label for=" available">SELECT IMAGE FILE TO UPLOAD: </label>
-                        <input type="file" name="img1">
-                        <input type="file" name="img2">
-                        <input type="file" name="img3">
-                        <input type="file" name="img4">
-                        <input type="file" name="img5">
+                        <label for="upload">SELECT IMAGE FILE TO UPLOAD: </label>
+                        <input type="file" name='img1' required>
+                        <input type="file" name='img2'>
+                        <input type="file" name='img3'>
+                        <input type="file" name='img4'>
+                        <input type="file" name='img5'>
                     </div>
 
                     <div class="form-element">
+                        <input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
                         <button type="button" class="btn cancel" onclick="home()">
                             Cancel
                         </button>
@@ -119,69 +120,64 @@
             $provider_id = $_SESSION['user_id'] ?? "";
             $available = $_REQUEST['available'] ?? "";
             $provision_address = $_REQUEST['provision_address'] ?? "";
+            $targetDir = "image/";
+
+            // // img1
+            if (isset($_FILES['img1']['name']) && isset($_FILES['img1']['tmp_name'])) {
+                $fileName1 = basename($_FILES['img1']['name']);
+                $tempImg1 = $_FILES['img1']['tmp_name'];
+                $targetFilePath1 = $targetDir . $fileName1;
+            }
+
+            // // img2
+            if (isset($_FILES['img2']['name']) && isset($_FILES['img2']['tmp_name'])) {
+                $fileName2 = basename($_FILES['img2']['name']);
+                $tempImg2 = $_FILES['img2']['tmp_name'];
+                $targetFilePath2 = $targetDir . $fileName2;
+            }
+
+            // // img3
+            if (isset($_FILES['img3']['name']) && isset($_FILES['img3']['tmp_name'])) {
+                $fileName3 = basename($_FILES['img3']['name']);
+                $tempImg3 = $_FILES['img3']['tmp_name'];
+                $targetFilePath3 = $targetDir . $fileName3;
+            }
+
+            // // img4
+            if (isset($_FILES['img4']['name']) && isset($_FILES['img4']['tmp_name'])) {
+                $fileName4 = basename($_FILES['img4']['name']);
+                $tempImg4 = $_FILES['img4']['tmp_name'];
+                $targetFilePath4 = $targetDir . $fileName4;
+            }
+
+            // // img5
+            if (isset($_FILES['img5']['name']) && isset($_FILES['img5']['tmp_name'])) {
+                $fileName5 = basename($_FILES['img5']['name']);
+                $tempImg5 = $_FILES['img5']['tmp_name'];
+                $targetFilePath5 = $targetDir . $fileName5;
+            }
 
             // If upload button is clicked ...
-            if (isset($_REQUEST['upload'])) {
-                // img1
-                $img1 = $_FILES["img1"]["name"] ?? "";
-                $tempImg1 = (file_get_contents($_FILES["img1"]["tmp_name"])) ?? "";
-                $folderImg1 = "image/" . $img1;
-
-                // // img2
-                // $img2 = $_FILES["img2"]["name"];
-                // $tempImg2 = $_FILES["img2"]["tmp_name"];
-                // $folderImg2 = "image/" . $img2;
-
-                // // img3
-                // $img3 = $_FILES["img3"]["name"];
-                // $tempImg3 = $_FILES["img3"]["tmp_name"];
-                // $folderImg3 = "image/" . $img3;
-
-                // // img4
-                // $img4 = $_FILES["img4"]["name"];
-                // $tempImg4 = $_FILES["img4"]["tmp_name"];
-                // $folderImg4 = "image/" . $img4;
-
-                // // img5
-                // $img5 = $_FILES["img5"]["name"];
-                // $tempImg5 = $_FILES["img5"]["tmp_name"];
-                // $folderImg5 = "ftp://2011690@mi-linux.wlv.ac.uk/home/stud/0/2011690/public_html/image" . $img5;
-
+            if (isset($_REQUEST['upload']) && $_REQUEST['randcheck'] == $_SESSION['rand']) {
 
                 // Get all the submitted data from the form
-                $sql = "INSERT INTO PROVISION(provision_title, provision_description, provision_type, rate, rate_unit_type, provider_id, available, provision_address, image_url_1) VALUES('$provision_title', '$provision_description', '$provision_type', '$rate', '$rate_unit_type', '$provider_id', '$available', '$provision_address', '$img1')";
-                // AND image_url_2 = '$img2' AND image_url_3 = '$img3' AND image_url_4 = '$img4' AND image_url_5 = '$img5'
+                $sql = "INSERT INTO PROVISION(provision_title, provision_description, provision_type, rate, rate_unit_type, provider_id, available, provision_address, image_url_1,image_url_2,image_url_3,image_url_4,image_url_5) VALUES('$provision_title', '$provision_description', '$provision_type', '$rate', '$rate_unit_type', '$provider_id', '$available', '$provision_address', '" . $fileName1 . "', '" . $fileName2 . "', '" . $fileName3 . "', '" . $fileName4 . "', '" . $fileName5 . "')";
 
-
-                // Execute query
-                mysqli_query($mysqli, $sql) or die(mysqli_error($mysqli));
-
-                // Now let's move the uploaded image into the folder: image
-                if (move_uploaded_file($tempImg1, $folderImg1)) {
+                // Excute query and move images into the folder in the server
+                if (
+                    mysqli_query($mysqli, $sql) &&
+                    move_uploaded_file($tempImg1, $targetFilePath1) &&
+                    move_uploaded_file($tempImg2, $targetFilePath2) &&
+                    move_uploaded_file($tempImg3, $targetFilePath3) &&
+                    move_uploaded_file($tempImg4, $targetFilePath4) &&
+                    move_uploaded_file($tempImg5, $targetFilePath5)
+                ) {
                     echo ("<script>window.alert('PRODUCT HAS BEEN LISTED.');</script>");
                 } else {
-                    echo ("<script>window.alert('ERROR! PRODUCT COULD NOT BE LISTED.');</script>");
+                    $delete = "DELETE from PROVISION ORDER BY provision_id DESC limit 1";
+                    mysqli_query($mysqli, $delete);
+                    echo ("<script>window.alert('ERROR! IMAGES COULD NOT BE UPLOADED. PRODUCT NOT LISTED.');</script>");
                 }
-                // if (move_uploaded_file($tempImg2, $folderImg2)) {
-                //     $msg = "Image uploaded successfully";
-                // } else {
-                //     $msg = "Failed to upload image . $tempImg2";
-                // }
-                // if (move_uploaded_file($tempImg3, $folderImg3)) {
-                //     $msg = "Image uploaded successfully";
-                // } else {
-                //     $msg = "Failed to upload image . $tempImg3";
-                // }
-                // if (move_uploaded_file($tempImg4, $folderImg4)) {
-                //     $msg = "Image uploaded successfully";
-                // } else {
-                //     $msg = "Failed to upload image . $tempImg4";
-                // }
-                // if (move_uploaded_file($tempImg5, $folderImg5)) {
-                //     $msg = "Image uploaded successfully";
-                // } else {
-                //     $msg = "Failed to upload image . $tempImg5";
-                // }
             }
             ?>
             </div>

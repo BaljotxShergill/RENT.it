@@ -130,6 +130,8 @@ header {
   width: 100%;
 }
 
+/* ---------------------------- PRODUCT LIST ---------------------------------------- */
+
 .products {
   margin-top: 9em;
   margin-left: auto;
@@ -147,18 +149,21 @@ header {
   width: 100%;
 }
 .tblproducts td {
-  border-radius: 15px;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
   padding: 1em;
 }
 
+.tblproducts tr {
+  border-radius: 15px;
+}
+
 .tblproducts tr:hover {
   background-color: #ddddddb8;
 }
 
-#pimg {
+.tblproducts #listimg {
   border-radius: 10px;
   display: flex;
   margin-right: auto;
@@ -403,16 +408,13 @@ input {
 }
 /* --------------------------------- PRODUCT PAGE -------------------------------------------- */
 .row {
-  width: 90%;
   margin: auto;
   display: flex;
-  align-items: center;
   justify-content: space-evenly;
 }
 
 .column {
-  flex: 50;
-  margin-left: 1em;
+  flex: 50%;
 }
 
 .all-images {
@@ -424,22 +426,22 @@ input {
 .small-images {
   display: flex;
   flex-direction: column;
+  margin: auto;
 }
 
-.small-images img {
-  border-radius: 15px;
-  height: 10vh;
-  width: auto;
-  margin-bottom: 9px;
-  cursor: pointer;
-  opacity: 0.6;
+.small-images #pimg {
+  border-radius: 10px;
+  display: flex;
+  margin-right: auto;
+  height: 5em;
+  margin-bottom: 0.5em;
 }
 
 .small-images img:hover {
   opacity: 1;
 }
 
-.main-images img {
+.main-images #imagebox {
   border-radius: 15px;
   margin-left: 1em;
   height: 100%;
@@ -510,13 +512,14 @@ input {
   max-height: 21em;
   margin: 1em;
 }
-.card #pimg {
+.card #boximg {
   border-radius: 10px;
   display: flex;
   margin-right: auto;
   margin-left: auto;
   width: 11em;
   max-width: 11em;
+  max-height: 11em;
 }
 
 .card h1 {
@@ -603,6 +606,12 @@ input {
   background-color: rgba(255, 0, 0, 0.849);
 }
 
+.container-row #listimg {
+  width: 50%;
+  display: flex;
+  margin: auto;
+}
+
 .accountList {
   width: 100%;
   display: flex;
@@ -684,6 +693,16 @@ input {
 .close:focus {
   color: #f44336;
   cursor: pointer;
+}
+/* --------------------------- RENT PRODUCT ---------------------------- */
+.rent-product {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 100;
+  padding-top: 7em;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px) saturate(180%);
 }
 
 /* -------------------------------------- MEDIA -------------------------------------------------- */

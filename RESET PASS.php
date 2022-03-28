@@ -16,21 +16,12 @@
   <form action="" class="form-container" method="post">
     <img style="width: 20%; display: flex; margin: auto;" src="login icon.png">
 
-    <label for="username"><b>USERNAME</b></label>
-    <input name="username" type="text" placeholder="Enter Username" required>
+    <label for="email"><b>EMAIL</b></label>
+    <input name="email" type="text" placeholder="Enter EMAIL" required>
 
-    <label for="password"><b>PASSWORD</b></label>
-    <input name="user_password" type="password" placeholder="Enter Password" required>
 
-    <p style="display: flex; margin: auto; margin-bottom: 10px;">
-      TO RESET PASSWORD CLICK
-      <a href="RESET PASS.php" style="color: dodgerblue">HERE</a>.
-    </p>
-
-    <button name="submit" type="submit" class="btn">LOGIN</button>
-    <button type="button" class="btn cancel" onclick="home()">CLOSE</button>
-    <h4 style="text-align:center">- OR -</h4>
-    <button type="button" class="btn create" onclick="signup()">SIGN UP</button>
+    <button name="submit" type="submit" class="btn">SEND REQUEST</button>
+    <button type="button" class="btn cancel" onclick="home()">CANCEL</button>
   </form>
 
   <?php

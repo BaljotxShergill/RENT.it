@@ -18,6 +18,9 @@
         if (!isset($_SESSION)) {
             session_start();
         }
+        if (!isset($_SESSION['user'])) {
+            header("Location:login form.php");
+        }
         ?>
         <h1>RENT.it</h1>
 
@@ -44,7 +47,7 @@
             $search = null;
         }
         ?>
-        <form class="products" action="" method="get">
+        <form class="products" action="RENT PRODUCT.php" method="get">
             <?php
             $result = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id LIKE $search ");
             while ($row = mysqli_fetch_array($result)) {
@@ -57,29 +60,37 @@
                                 <div class="small-images">
                                     <?php if ($row['image_url_2']) {
                                     ?>
-                                        <?php echo "<img  onclick='clickimg(this)' src=" . $row['image_url_2'] . " >"; ?>
+                                        <?php $imageURL2 = 'image/' . $row["image_url_2"]; ?>
+                                        <img onclick='clickimg(this)' id='pimg' src="<?php echo $imageURL2; ?>" alt="" />
                                     <?php
                                     } ?>
                                     <?php if ($row['image_url_3']) {
                                     ?>
-                                        <?php echo "<img onclick='clickimg(this)' src=" . $row['image_url_3'] . " >"; ?>
+                                        <?php $imageURL2 = 'image/' . $row["image_url_3"]; ?>
+                                        <img onclick='clickimg(this)' id='pimg' src="<?php echo $imageURL2; ?>" alt="" />
                                     <?php
                                     } ?>
                                     <?php if ($row['image_url_4']) {
                                     ?>
-                                        <?php echo "<img  onclick='clickimg(this)' src=" . $row['image_url_4'] . " >"; ?>
+                                        <?php $imageURL4 = 'image/' . $row["image_url_4"]; ?>
+                                        <img onclick='clickimg(this)' id='pimg' src="<?php echo $imageURL4; ?>" alt="" />
+
                                     <?php
                                     } ?>
                                     <?php if ($row['image_url_5']) {
                                     ?>
-                                        <?php echo "<img  onclick='clickimg(this)' src=" . $row['image_url_5'] . " >"; ?>
+                                        <?php $imageURL5 = 'image/' . $row["image_url_5"]; ?>
+                                        <img onclick='clickimg(this)' id='pimg' src="<?php echo $imageURL5; ?>" alt="" />
+
                                     <?php
                                     } ?>
                                 </div>
                                 <div class="main-images">
                                     <?php if ($row['image_url_1']) {
                                     ?>
-                                        <?php echo "<img id='imagebox' src=" . $row['image_url_1'] . " >"; ?>
+                                        <?php $imageURL = 'image/' . $row["image_url_1"]; ?>
+                                        <img onclick='clickimg(this)' id="imagebox"' src="<?php echo $imageURL; ?>" alt="" />
+
                                     <?php
                                     } ?>
                                 </div>
@@ -95,7 +106,7 @@
                             <strike>&#163; <?php echo $row['rate'] + rand(0, 10), "  ", $row['rate_unit_type']; ?></strike>
                         </div>
 
-                        <button class="btn rent">
+                        <button class="btn rent" style="width: auto;" type="submit" name="productId" value=<?php echo $row['provision_id']; ?>>
                             <span class="fa fa-shopping-cart">
                             </span>
                             <h3>RENT NOW</h3>
@@ -103,50 +114,10 @@
 
                     </div>
                 </div>
-                <h1 style="  
-                color: black;
-                text-transform: uppercase;
-                font-size: 3em;
-                display: flex;
-                margin-left: auto;
-                margin-right: auto;
-                align-content: flex-start;
-                justify-content: center;
-                margin-top: inherit;">
-                    EXPLORE MORE PRODUCTS
-                </h1>
-                <div class="row">
-
-                    <?php
-                    $max = mysqli_query($mysqli, "SELECT * FROM PROVISION");
-                    $max = mysqli_num_rows($max);
-                    $rand = rand(0, $max);
-                    $result = mysqli_query($mysqli, "SELECT * FROM PROVISION LIMIT 4 OFFSET $rand");
-                    while ($row = mysqli_fetch_array($result)) {
-                    ?>
-                        <div class="card">
-                            <?php if ($row['image_url_1']) {
-                            ?>
-                                <?php echo "<img id='pimg' src=" . $row['image_url_1'] . " >"; ?>
-                            <?php
-                            } ?>
-                            <h1><?php echo $row['provision_title']; ?></h1>
-                            <button class="btn view" type="submit" value=<?php echo $row['provision_id']; ?>>
-                                <h3>VIEW NOW</h3>
-                            </button>
-                        </div>
-
-                    <?php
-                    }
-                    ?>
-
-
-                </div>
-            <?php
+                <?php
             }
-            ?>
-
-        </form>
+                ?>
+</form>
     </body>
 
     <ul class="social">

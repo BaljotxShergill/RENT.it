@@ -29,7 +29,7 @@
   </header>
 
   <body>
-    <form class="form" action="index.php" style="border: 1px solid #ccc" method="post">
+    <form class="form" action="" style="border: 1px solid #ccc" method="post">
       <div class="container-row">
         <h1 style="display: flex;  color: black">
           CREATE AN ACCOUNT
@@ -39,7 +39,7 @@
           <label for="account_type">ACCOUNT TYPE</label>
           <select placeholder="Select account type..." name="account_type">
             <option value="CONSUMER">STANTARD ACCOUNT</option>
-            <option value="PROVIDER">RENTER ACCOUNT</option>
+            <option value="PROVIDER">LENDER ACCOUNT</option>
           </select>
         </div>
       </div>
@@ -103,7 +103,7 @@
           <button type="button" class="btn cancel" onclick="home()">
             Cancel
           </button>
-          <button type="submit" class="btn">Sign Up</button>
+          <button type="submit" name="create" class="btn">Sign Up</button>
         </div>
       </div>
 
@@ -142,14 +142,19 @@
         $account_type = null;
       }
 
-      $result = mysqli_query($mysqli, "SELECT * FROM USERS WHERE username='$username' OR user_email='$user_email'");
+      if (isset($_REQUEST['create'])) {
 
-      if ($result->num_rows >= 1) {
-        print("<script>window.alert('USERNAME ALREADY EXISTS, PLEASE TRY AGAIN');</script>");
-      } else {
-        mysqli_query($mysqli, "INSERT INTO USERS(surname,forename, dob, contact_number, home_address, username, user_password, user_email, creation_date, account_type) VALUES('$surname','$forename', '$dob','$contact_number','$home_address','$username','$user_password','$user_email', NOW() , '$account_type')");
-        print("<script>window.alert('ACCOUNT CREATED');</script>");
-      }
+        $result = mysqli_query($mysqli, "SELECT * FROM USERS WHERE username='$username' OR user_email='$user_email'");
+
+        if ($result->num_rows >= 1) {
+          print("<script>window.alert('USERNAME ALREADY EXISTS, PLEASE TRY AGAIN');</script>");
+        } else {
+          mysqli_query($mysqli, "INSERT INTO USERS(surname,forename, dob, contact_number, home_address, username, user_password, user_email, creation_date, account_type) VALUES('$surname','$forename', '$dob','$contact_number','$home_address','$username','$user_password','$user_email', NOW() , '$account_type')");
+          echo ("<script>window.alert('ACCOUNT CREATED');</script>");
+          }
+        } else {
+          echo ("<script>window.alert('ACCOUNT NOT CREATED');</script>");
+        }
 
       ?>
       </div>

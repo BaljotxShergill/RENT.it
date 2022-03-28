@@ -35,3 +35,10 @@ function check() {
     document.getElementById("message").innerHTML = "not matching";
   }
 }
+
+function calculateAmount(val) {
+  var tot_price = cost_per_day * val;
+  /*display the result*/
+  var divobj = document.getElementById('cost');
+  divobj.value = tot_price;
+}
