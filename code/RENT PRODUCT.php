@@ -44,9 +44,10 @@
             $search = null;
         }
         ?>
-        <form class="rent-product" action="" method="get">
+
+        <form class="rent-product" action="index.php" method="post">
             <?php
-            $result = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id LIKE $search ");
+            $result = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id LIKE $search AND available != 'NO'");
             while ($row = mysqli_fetch_array($result)) {
             ?>
                 <div class="container-row">
@@ -79,7 +80,7 @@
 
                         <div class="form-element">
                             <label for="collection_date"><b>COLLECTION DATE</b></label>
-                            <input type="date" placeholder="Enter date from when to start" name="collection_date" required />
+                            <input type="date" placeholder="Enter date from when to start" name="collection_date" />
                         </div>
 
                         <div class="selectList">
@@ -121,6 +122,11 @@
                         </div>
 
                         <div class="form-element">
+                            <label for="expiry_date"><b>EXPIRY DATE</b></label>
+                            <input type="date" placeholder="Enter expiry date of the card" name="expiry_date" required />
+                        </div>
+
+                        <div class="form-element">
                             <label for="card_number"><b>CARD NUMBER</b></label>
                             <input type="text" placeholder="Enter card number" name="card_number" required />
                         </div>
@@ -139,40 +145,52 @@
                     </div>
                 </div>
             <?php
+
+
+                if (
+                    isset($_REQUEST["collection_date"]) &&
+                    isset($_REQUEST["select_days"]) &&
+                    isset($_REQUEST["cost"]) &&
+                    isset($_REQUEST["name_on_card"]) &&
+                    isset($_REQUEST["expiry_date"]) &&
+                    isset($_REQUEST["billing_address"]) &&
+                    isset($_REQUEST["card_number"]) &&
+                    isset($_REQUEST["cvv"])
+                ) {
+                    $user_id = $_SESSION['user_id'];
+                    $provision_id = $_GET['productId'];
+                    $provider_id = $row["provider_id"];
+                    $collection_date = date('Y-m-d', strtotime($_REQUEST['collection_date']));
+                    $select_days = $_REQUEST["select_days"];
+                    $cost = $_REQUEST["cost"];
+                    $name_on_card = $_REQUEST["name_on_card"];
+                    $billing_address = $_REQUEST["billing_address"];
+                    $expiry_date = date('Y-m-d', strtotime($_REQUEST['expiry_date']));
+                    $card_number = $_REQUEST["card_number"];
+                    $cvv = $_REQUEST["cvv"];
+                } else {
+                    $collection_date = date("Y-m-d");
+                    $select_days = NULL;
+                    $cost = NULL;
+                    $name_on_card = NULL;
+                    $billing_address = NULL;
+                    $expiry_date = date("Y-m-d");
+                    $card_number = NULL;
+                    $cvv = NULL;
+                }
+
+                if (isset($_REQUEST['order']) && $row['available'] == "YES") {
+                    $billing_insert = "INSERT INTO BILLING(user_id, name_on_card, billing_address, card_number, expiry_date, cvv) VALUES('$user_id','$name_on_card', '$billing_address','$card_number','$expiry_date','$cvv')";
+                    if (mysqli_query($mysqli, $billing_insert)) {
+                        $order_insert = "INSERT INTO ORDERS(provision_id, unit_amount, cost, request_date, collection_date, consumer_id, provider_id) VALUES('$provision_id','$select_days', '$cost', NOW(),'$collection_date','$user_id', '$provider_id')";
+                        if (mysqli_query($mysqli, $order_insert)) {
+                            $provision_update = "UPDATE PROVISION SET available = 'NO' WHERE provision_id = $provision_id";
+                            mysqli_query($mysqli, $provision_update);
+                            echo ("<script>window.alert('ORDER PLACED');</script>");
+                        }
+                    }
+                }
             }
-
-            // Connect to server/database
-            include("database.php");
-
-            if (
-                isset($_REQUEST["collection_date"]) &&
-                isset($_REQUEST["select_days"]) &&
-                isset($_REQUEST["cost"]) &&
-                isset($_REQUEST["name_on_card"]) &&
-                isset($_REQUEST["billing_address"]) &&
-                isset($_REQUEST["card_number"]) &&
-                isset($_REQUEST["cvv"])
-            ) {
-                $collection_date = date('Y-m-d', strtotime($_REQUEST['collection_date']));
-                $select_days = $_REQUEST["select_days"];
-                $cost = $_REQUEST["cost"];
-                $name_on_card = $_REQUEST["name_on_card"];
-                $billing_address = $_REQUEST["billing_address"];
-                $card_number = $_REQUEST["card_number"];
-                $cvv = $_REQUEST["cvv"];
-            } else {
-                $collection_date = date("Y-m-d");
-                $select_days = NULL;
-                $cost = NULL;
-                $name_on_card = NULL;
-                $billing_address = NULL;
-                $card_number = NULL;
-                $cvv = NULL;
-            }
-
-            if (isset($_REQUEST['order'])) {
-            }
-
             ?>
         </form>
     </body>

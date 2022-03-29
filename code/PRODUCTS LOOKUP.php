@@ -56,7 +56,7 @@
                         <h1 class="searchres">Nothing found for: <?php echo $search; ?></h1>
                         <?php
                     } else {
-                        $result = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_title LIKE '%$search%' ");
+                        $result = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_title LIKE '%$search%' AND available != 'NO'");
                         while ($row = mysqli_fetch_array($result)) {
                         ?>
                             <tr>

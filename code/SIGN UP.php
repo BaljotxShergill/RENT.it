@@ -151,10 +151,8 @@
         } else {
           mysqli_query($mysqli, "INSERT INTO USERS(surname,forename, dob, contact_number, home_address, username, user_password, user_email, creation_date, account_type) VALUES('$surname','$forename', '$dob','$contact_number','$home_address','$username','$user_password','$user_email', NOW() , '$account_type')");
           echo ("<script>window.alert('ACCOUNT CREATED');</script>");
-          }
-        } else {
-          echo ("<script>window.alert('ACCOUNT NOT CREATED');</script>");
         }
+      }
 
       ?>
       </div>

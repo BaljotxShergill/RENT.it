@@ -35,9 +35,9 @@
         $admin = "admin";
         if ($session_User == $admin) {
         ?>
-            <li>
+            <li style="text-transform: uppercase;">
                 <strong>
-                    ADMIN
+                    <a style="color: red;" href="MANAGE ACCOUNT.php"><?php echo $admin; ?></a>
                 </strong>
             </li>
         <?php
@@ -48,8 +48,10 @@
             <li style="color: white;">
                 Welcome,
                 <strong>
-                    <?php echo $session_User . '  '; ?>
+                    <a style="color: red;" href="MANAGE ACCOUNT.php"><?php echo $session_User; ?></a>
                 </strong>
+            </li>
+            <li>
                 <?php echo "<button class='login' onclick='logout()'>LOGOUT</button>"; ?>
             </li>
         <?php

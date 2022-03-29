@@ -49,7 +49,7 @@
         ?>
         <form class="products" action="RENT PRODUCT.php" method="get">
             <?php
-            $result = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id LIKE $search ");
+            $result = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id LIKE $search AND available != 'NO'");
             while ($row = mysqli_fetch_array($result)) {
             ?>
                 <div class="row">
