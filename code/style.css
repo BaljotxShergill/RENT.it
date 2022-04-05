@@ -142,11 +142,18 @@ header {
   width: 90%;
   color: black;
 }
+
 .tblproducts {
   border-collapse: collapse;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+}
+
+.tblproducts th {
+  background-color: #000000;
+  padding: 0.5em;
+  color: white;
 }
 .tblproducts td {
   align-items: center;
@@ -157,6 +164,7 @@ header {
 
 .tblproducts tr {
   border-radius: 15px;
+    text-align: center;
 }
 
 .tblproducts tr:hover {
@@ -703,6 +711,54 @@ input {
   padding-top: 9em;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px) saturate(180%);
+}
+
+/* ----------------------------------- ADMIN OPTION ---------------------------------- */
+.btnID{
+  background-color: black;
+  padding: 0.5em;
+  color: white;
+ border-radius: 5px;
+}
+.btnID:hover {
+  background-color: white;
+  color: black;
+}
+
+.tblOrders {
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  table-layout: fixed; 
+}
+.tblOrders td+td {
+  border-left: 2px solid black;
+}
+.tblOrders th+th {
+  border-left: 2px solid white;
+}
+
+.tblOrders th{
+  background-color: #000000;
+  padding: 0.5em;
+  color: white;
+}
+
+.tblOrders td {
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+}
+
+.tblOrders tr {
+  border-radius: 15px;
+  text-align: center;
+}
+
+.tblOrders tr:hover {
+  background-color: #ddddddb8;
 }
 
 /* -------------------------------------- MEDIA -------------------------------------------------- */

@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <script src="script.js"></script>
     <title>RENT.it</title>
 </head>
@@ -38,16 +37,16 @@
         <?php
         // Connect to server/database
         include("database.php");
-        if (isset($_GET['productId'])) {
-            $search = $_GET['productId'];
+        if (isset($_REQUEST['productId'])) {
+            $search = $_REQUEST['productId'];
         } else {
             $search = null;
         }
         ?>
 
-        <form class="rent-product" action="index.php" method="post">
+        <form class="rent-product" action="" method="post">
             <?php
-            $result = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id LIKE $search AND available != 'NO'");
+            $result = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id = $search");
             while ($row = mysqli_fetch_array($result)) {
             ?>
                 <div class="container-row">
@@ -80,12 +79,12 @@
 
                         <div class="form-element">
                             <label for="collection_date"><b>COLLECTION DATE</b></label>
-                            <input type="date" placeholder="Enter date from when to start" name="collection_date" />
+                            <input type="date" placeholder="Enter date from when to start" name="collection_date" required />
                         </div>
 
                         <div class="selectList">
                             <label for="num_days"><b>NUMBER OF DAYS</b></label>
-                            <select name="select_days" placeholder="Select number of days" onchange="calculateAmount(this.value)">
+                            <select name="select_days" placeholder="Select number of days" onchange="calculateAmount(this.value)" required>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -158,7 +157,7 @@
                     isset($_REQUEST["cvv"])
                 ) {
                     $user_id = $_SESSION['user_id'];
-                    $provision_id = $_GET['productId'];
+                    $provision_id = $_REQUEST['productId'];
                     $provider_id = $row["provider_id"];
                     $collection_date = date('Y-m-d', strtotime($_REQUEST['collection_date']));
                     $select_days = $_REQUEST["select_days"];
@@ -179,10 +178,10 @@
                     $cvv = NULL;
                 }
 
-                if (isset($_REQUEST['order']) && $row['available'] == "YES") {
+                if (isset($_REQUEST["order"])) {
                     $billing_insert = "INSERT INTO BILLING(user_id, name_on_card, billing_address, card_number, expiry_date, cvv) VALUES('$user_id','$name_on_card', '$billing_address','$card_number','$expiry_date','$cvv')";
                     if (mysqli_query($mysqli, $billing_insert)) {
-                        $order_insert = "INSERT INTO ORDERS(provision_id, unit_amount, cost, request_date, collection_date, consumer_id, provider_id) VALUES('$provision_id','$select_days', '$cost', NOW(),'$collection_date','$user_id', '$provider_id')";
+                        $order_insert = "INSERT INTO ORDERS(provision_id, unit_amount, cost, request_date, collection_date, consumer_id, provider_id) VALUES('$provision_id', '$select_days', '$cost', NOW(),'$collection_date','$user_id', '$provider_id')";
                         if (mysqli_query($mysqli, $order_insert)) {
                             $provision_update = "UPDATE PROVISION SET available = 'NO' WHERE provision_id = $provision_id";
                             mysqli_query($mysqli, $provision_update);
@@ -195,11 +194,6 @@
         </form>
     </body>
 
-    <ul class="social">
-        <li><a href="#"><img src="https://i.ibb.co/x7P24fL/facebook.png">
-        <li><a href="#"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png">
-        <li><a href="#"><img src="https://i.ibb.co/ySwtH4B/instagram.png">
-    </ul>
 </section>
 
 </html>

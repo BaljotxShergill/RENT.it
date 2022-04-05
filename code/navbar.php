@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="design.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 </head>
 
 <body>
@@ -37,7 +36,7 @@
         ?>
             <li style="text-transform: uppercase;">
                 <strong>
-                    <a style="color: red;" href="MANAGE ACCOUNT.php"><?php echo $admin; ?></a>
+                    <a style="color: red;" href="ADMIN OPTION.php"><?php echo $admin; ?></a>
                 </strong>
             </li>
         <?php
