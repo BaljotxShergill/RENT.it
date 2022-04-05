@@ -12,48 +12,63 @@
   <title>RENT.it</title>
 </head>
 
-<body>
-  <form action="" class="form-container" method="post">
-    <img style="width: 20%; display: flex; margin: auto;" src="login icon.png">
+<section class="showcase">
+  <header>
+    <h1>RENT.it</h1>
 
-    <label for="email"><b>EMAIL</b></label>
-    <input name="email" type="text" placeholder="Enter EMAIL" required>
+    <div class="navbar">
+      <?php
+      include("navbar.php")
+      ?>
+    </div>
+  </header>
+
+  <body>
+    <form action="" class="form-container" method="post">
+      <div class="form-element">
+        <h4 style="text-align:center ; width: 100%;">RESET PASSWORD</h4>
+      </div>
+
+      <label for="email"><b>EMAIL</b></label>
+      <input name="email" type="text" placeholder="Enter your email..." required>
 
 
-    <button name="submit" type="submit" class="btn">SEND REQUEST</button>
-    <button type="button" class="btn cancel" onclick="home()">CANCEL</button>
-  </form>
+      <button name="submit" type="submit" class="btn">SEND REQUEST</button>
+      <button type="button" class="btn cancel" onclick="home()">CANCEL</button>
+    </form>
 
-  <?php
-  // Connect to server/database
-  include("database.php");
-
-  if (!isset($_SESSION)) {
-    session_start();
-  }
-  if (isset($_REQUEST["username"]) && isset($_REQUEST["user_password"])) {
-    $username_User = mysqli_real_escape_string($mysqli, $_REQUEST["username"]);
-    $password_User = mysqli_real_escape_string($mysqli, $_REQUEST["user_password"]);
-  } else {
-    $username_User = null;
-    $password_User = null;
-  }
-
-  if (isset($_REQUEST['submit'])) {
-    // Run SQL query
-    echo ("<script>window.alert($username_User, $password_User);</script>");
-    $res = mysqli_query($mysqli, "SELECT * FROM USERS WHERE username='$username_User' AND user_password='$password_User'");
-    $row = mysqli_fetch_array($res);
-    if ($res->num_rows == 1) {
-      $_SESSION['user'] = $username_User;
-      $_SESSION['user_id'] = $row['user_id'];
-      header('Location: index.php');
-    } elseif ($username_User && $password_User) {
-      echo ("<script>window.alert('USERNAME OR PASSWORD INCORRECT, PLEASE TRY AGAIN.');</script>");
+    <?php
+    // Connect to server/database
+    include("database.php");
+    if (isset($_POST['email'])) {
+      $email = mysqli_real_escape_string($mysqli, $_POST['email']);
+    } else {
+      $email = null;
     }
-  }
-  ?>
+    if (isset($_REQUEST['submit'])) {
+      $sql = "SELECT * FROM USERS WHERE user_email = '$email'";
+      $res = mysqli_query($mysqli, $sql);
+      $count = mysqli_num_rows($res);
+      if ($count == 1) {
+        $row = mysqli_fetch_assoc($res);
+        $user_password = $row['user_password'];
+        $to = $row['user_email'];
+        $subject = "Your Recovered Password";
 
-</body>
+        $message = "Please use this password to login " . $user_password;
+        $headers = "From : admin1@gmail.com";
+        if (mail($to, $subject, $message, $headers)) {
+          echo '<script> alert("Your Password has been sent to your email. Please check your inbox."); </script>';
+        } else {
+          echo '<script> alert("Failed to recover your password, try again"); </script>';
+        }
+      } else {
+        echo '<script> alert("This email does not exists in our database."); </script>';
+      }
+    }
+    ?>
+
+  </body>
+</section>
 
 </html>

@@ -23,7 +23,7 @@
     <input name="user_password" type="password" placeholder="Enter Password" required>
 
     <p style="display: flex; margin: auto; margin-bottom: 10px;">
-      TO RESET PASSWORD CLICK
+      TO RESET PASSWORD CLICK &nbsp;
       <a href="RESET PASS.php" style="color: dodgerblue">HERE</a>.
     </p>
 
