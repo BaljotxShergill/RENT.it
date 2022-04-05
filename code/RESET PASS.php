@@ -57,7 +57,7 @@
         $message = "Please use this password to login " . $user_password;
         $headers = "From : admin1@gmail.com";
         if (mail($to, $subject, $message, $headers)) {
-          echo '<script> alert("Your Password has been sent to your email. Please check your inbox."); </script>';
+          echo '<script> alert("Your Password has been sent to your email. Please check your inbox.\n\n --- \nFOR SECURITY REASONS, THE SERVER DOES NOT ALLOW THIS FUNCTION. \nPLEASE CONTACT THE ADMIN TO RESET THE PASSWORD.\n ---"); </script>';
         } else {
           echo '<script> alert("Failed to recover your password, try again"); </script>';
         }
