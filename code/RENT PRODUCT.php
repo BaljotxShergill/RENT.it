@@ -183,9 +183,25 @@
                     if (mysqli_query($mysqli, $billing_insert)) {
                         $order_insert = "INSERT INTO ORDERS(provision_id, unit_amount, cost, request_date, collection_date, consumer_id, provider_id) VALUES('$provision_id', '$select_days', '$cost', NOW(),'$collection_date','$user_id', '$provider_id')";
                         if (mysqli_query($mysqli, $order_insert)) {
-                            $provision_update = "UPDATE PROVISION SET available = 'NO' WHERE provision_id = $provision_id";
-                            mysqli_query($mysqli, $provision_update);
-                            echo ("<script>window.alert('ORDER PLACED');</script>");
+
+                            $selectLastOrderID = mysqli_query($mysqli, "SELECT * FROM ORDERS ORDER BY order_id DESC LIMIT 1");
+                            $rowLastOrderID = mysqli_fetch_array($selectLastOrderID);
+                            $lastOrderID = $rowLastOrderID['order_id'];
+                            $collection_date = $rowLastOrderID['collection_date'];
+
+                            $resultProvision = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id = $provision_id");
+                            $rowProvision = mysqli_fetch_array($resultProvision);
+                            $collection_address = $rowProvision['provision_address'];
+
+
+                            $collection_insert = "INSERT INTO COLLECTION(provision_id, order_id, collection_address, collection_datetime, collection_status) VALUES('$provision_id', '$lastOrderID', '$collection_address', '$collection_date','PENDING')";
+
+                            if (mysqli_query($mysqli, $collection_insert)) {
+                                $provision_update = "UPDATE PROVISION SET available = 'NO' WHERE provision_id = $provision_id";
+                                mysqli_query($mysqli, $provision_update);
+                                echo ("<script>window.alert('ORDER PLACED, CURRENTLY UNDER REVIEW BY THE OWNER. \n TO VIEW YOUR ORDERS, CLICK ON THE ACCOUNT NAME.');</script>");
+                                echo ("<script>window.location.href = 'MANAGE ACCOUNT.php';</script>");
+                            }
                         }
                     }
                 }

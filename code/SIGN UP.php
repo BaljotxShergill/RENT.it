@@ -34,13 +34,6 @@
           CREATE AN ACCOUNT
         </h1>
         <p>Please fill in this form to create an account.</p>
-        <div class="accountList">
-          <label for="account_type">ACCOUNT TYPE</label>
-          <select placeholder="Select account type..." name="account_type">
-            <option value="CONSUMER">STANTARD ACCOUNT</option>
-            <option value="PROVIDER">LENDER ACCOUNT</option>
-          </select>
-        </div>
       </div>
       <div class="container-row">
         <div class="container-col">

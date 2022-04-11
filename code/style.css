@@ -730,13 +730,9 @@ input {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  table-layout: fixed; 
 }
 .tblOrders td+td {
   border-left: 2px solid black;
-}
-.tblOrders th+th {
-  border-left: 2px solid white;
 }
 
 .tblOrders th{
