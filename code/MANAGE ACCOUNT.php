@@ -55,7 +55,9 @@
                 $selectCollection = mysqli_query($mysqli, "SELECT * FROM COLLECTION WHERE order_id = $rowOrderID AND collection_status LIKE 'PENDING'");
                 if (mysqli_fetch_array($selectCollection) > 0) {
             ?>
-                    <a href="MANAGE PENDING ORDERS.php">REVIEW PENDING ORDERS</a>
+                    <table class="tblproducts">
+                        <a id="pendingbtn" href="MANAGE PENDING ORDERS.php">REVIEW PENDING ORDERS</a>
+                    </table>
             <?php
                 }
             }
@@ -85,24 +87,18 @@
                     <?php
                     $selectOrders = mysqli_query($mysqli, "SELECT * FROM ORDERS WHERE consumer_id = $user_id");
                     while ($rowOrder = mysqli_fetch_array($selectOrders)) {
-
-                        if (mysqli_fetch_array($selectOrders) < 1) {
-                    ?>
-                            <script>
-                                tblproducts.style.display === "none";
-                            </script>
-                        <?php
-                        }
                         $rowOrderID = $rowOrder['order_id'];
 
                         $selectCollection = mysqli_query($mysqli, "SELECT * FROM COLLECTION WHERE order_id = $rowOrderID AND collection_status LIKE '%PENDING%'");
 
                         if ($rowCollection = mysqli_fetch_array($selectCollection)) {
+                            $count = mysqli_num_rows($selectCollection);
+
                             $rowProvisionID = $rowOrder['provision_id'];
                             $resultProvision = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id = $rowProvisionID");
                             $rowProvision = mysqli_fetch_array($resultProvision);
 
-                        ?>
+                    ?>
                             <tr>
                                 <td><?php echo $rowCollection['collection_status']; ?></td>
                                 <td><?php echo $rowProvision['provision_title']; ?></td>
@@ -195,6 +191,7 @@
                     <?php
                     $selectOrders = mysqli_query($mysqli, "SELECT * FROM ORDERS WHERE consumer_id = $user_id");
                     while ($rowOrder = mysqli_fetch_array($selectOrders)) {
+
                         $rowOrderID = $rowOrder['order_id'];
 
                         $selectCollection = mysqli_query($mysqli, "SELECT * FROM COLLECTION WHERE order_id = $rowOrderID AND collection_status LIKE '%CANCELLED%'");

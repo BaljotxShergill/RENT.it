@@ -79,7 +79,7 @@
 
                         <div class="form-element">
                             <label for="collection_date"><b>COLLECTION DATE</b></label>
-                            <input type="date" placeholder="Enter date from when to start" name="collection_date" required />
+                            <input type="datetime-local" placeholder="Enter date from when to start" name="collection_date" required />
                         </div>
 
                         <div class="selectList">
@@ -159,7 +159,7 @@
                     $user_id = $_SESSION['user_id'];
                     $provision_id = $_REQUEST['productId'];
                     $provider_id = $row["provider_id"];
-                    $collection_date = date('Y-m-d', strtotime($_REQUEST['collection_date']));
+                    $collection_date = date('Y-m-d\TH:i:s', strtotime($_REQUEST['collection_date']));
                     $select_days = $_REQUEST["select_days"];
                     $cost = $_REQUEST["cost"];
                     $name_on_card = $_REQUEST["name_on_card"];
@@ -168,7 +168,7 @@
                     $card_number = $_REQUEST["card_number"];
                     $cvv = $_REQUEST["cvv"];
                 } else {
-                    $collection_date = date("Y-m-d");
+                    $collection_date = date("Y-m-d h:i:sa");
                     $select_days = NULL;
                     $cost = NULL;
                     $name_on_card = NULL;

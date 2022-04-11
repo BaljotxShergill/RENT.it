@@ -104,8 +104,13 @@
                 if ($collectionID != NULL && isset($_REQUEST['approveOrder'])) {
                     $approveCollection  = "UPDATE COLLECTION SET collection_status = 'APPROVED' WHERE collection_id = $collectionID";
                     mysqli_query($mysqli, $approveCollection);
-                    echo ("<script>window.alert('ORDER APPROVED.');</script>");
-                    echo ("<script>window.location.href = 'MANAGE ACCOUNT.php';</script>");
+
+                    $amount = $rowOrder['unit_amount'] * $rowOrder['cost'];
+                    $insertTranscation = "INSERT INTO TRANSACTION(transaction_type,amount, date_transaction, order_id) VALUES('CREDIT','$amount', NOW(),'$rowOrderID')";
+                    if (mysqli_query($mysqli, $insertTranscation)) {
+                        echo ("<script>window.alert('ORDER APPROVED.');</script>");
+                        echo ("<script>window.location.href = 'MANAGE ACCOUNT.php';</script>");
+                    }
                 } elseif ($collectionID != NULL && isset($_REQUEST['cancelOrder'])) {
                     $cancelCollection = "UPDATE COLLECTION SET collection_status = 'CANCELLED' WHERE collection_id = $collectionID";
                     mysqli_query($mysqli, $cancelCollection);
