@@ -65,7 +65,11 @@
                 ?>
                     <tr>
                         <td><?php echo $row['order_id']; ?></td>
-                        <td><?php echo $row['provision_id']; ?></td>
+                        <td>
+                            <button type="submit" name="viewProduct" class="btnID" value=" <?php echo $row['provision_id']; ?>">
+                                <?php echo $row['provision_id']; ?>
+                            </button>
+                        </td>
                         <?php
                         if ($row['unit_amount'] > 1) {
                         ?>
@@ -124,6 +128,33 @@
                                 <td><?php echo $rowUser['contact_number']; ?></td>
                                 <td><?php echo $rowUser['home_address']; ?></td>
                                 <td><?php echo $rowUser['user_email']; ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    <?php
+                    }
+                } elseif (isset($_REQUEST['viewProduct'])) {
+                    $id = $_REQUEST['viewProduct'];
+
+                    ?>
+                    <h1 class="searchres">MORE INFO FOR PRODUCT ID: <?php echo $id ?></h1>
+                    <th>NAME</th>
+                    <th>DESCRIPTION</th>
+                    <th>TYPE</th>
+                    <th>COST</th>
+                    <th>ADDRESS</th>
+                    <?php
+                    if ($id != NULL) {
+                        $selectProduct = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id = $id");
+                        while ($rowProvision = mysqli_fetch_array($selectProduct)) {
+                    ?>
+                            <tr>
+                                <td><?php echo $rowProvision['provision_title']; ?></td>
+                                <td><?php echo $rowProvision['provision_description']; ?></td>
+                                <td><?php echo $rowProvision['provision_type']; ?></td>
+                                <td><?php echo "£" . $rowProvision['rate'], "  ", $rowProvision['rate_unit_type']; ?></td>
+                                <td><?php echo $rowProvision['provision_address']; ?></td>
                             </tr>
                         <?php
                         }

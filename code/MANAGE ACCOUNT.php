@@ -137,6 +137,7 @@
                     <th>COLLECTION DATE/TIME</th>
                     <th>PERIOD</th>
                     <th>COST</th>
+                    <th>CONTACT PROVIDER</th>
 
                     <?php
                     $selectOrders = mysqli_query($mysqli, "SELECT * FROM ORDERS WHERE consumer_id = $user_id");
@@ -149,6 +150,11 @@
                             $rowProvisionID = $rowOrder['provision_id'];
                             $resultProvision = mysqli_query($mysqli, "SELECT * FROM PROVISION WHERE provision_id = $rowProvisionID");
                             $rowProvision = mysqli_fetch_array($resultProvision);
+
+                            $rowProviderID = $rowOrder['provider_id'];
+                            $resultUser = mysqli_query($mysqli, "SELECT * FROM USERS WHERE user_id = $rowProviderID");
+                            $rowUser = mysqli_fetch_array($resultUser);
+
 
                     ?>
                             <tr>
@@ -168,6 +174,7 @@
                                 }
                                 ?>
                                 <td><?php echo "£" . $rowOrder['cost']; ?></td>
+                                <td><?php echo $rowUser['user_email']; ?></td>
 
                             </tr>
                         <?php
