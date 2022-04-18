@@ -79,14 +79,6 @@
                             <option value="SERVICE">SERVICE</option>
                         </select>
                     </div>
-
-                    <div class="selectList">
-                        <label for="available">AVAILABLE </label>
-                        <select placeholder="Select avalaibility" name="available" required>
-                            <option value="YES">YES</option>
-                            <option value="NO">NO</option>
-                        </select>
-                    </div>
                 </div>
 
                 <div class="container-row">
@@ -117,7 +109,7 @@
             $rate = $_REQUEST['rate'] ?? "";
             $rate_unit_type = $_REQUEST['rate_unit_type'] ?? "";
             $provider_id = $_SESSION['user_id'] ?? "";
-            $available = $_REQUEST['available'] ?? "";
+            $available = "YES";
             $provision_address = $_REQUEST['provision_address'] ?? "";
             $targetDir = "image/";
 
@@ -157,7 +149,7 @@
             }
 
             // If upload button is clicked ...
-            if (isset($_REQUEST['upload']) && $_REQUEST['randcheck'] == $_SESSION['rand']) {
+            if (isset($_REQUEST['upload'])) {
 
                 // Get all the submitted data from the form
                 $sql = "INSERT INTO PROVISION(provision_title, provision_description, provision_type, rate, rate_unit_type, provider_id, available, provision_address, image_url_1,image_url_2,image_url_3,image_url_4,image_url_5) VALUES('$provision_title', '$provision_description', '$provision_type', '$rate', '$rate_unit_type', '$provider_id', '$available', '$provision_address', '" . $fileName1 . "', '" . $fileName2 . "', '" . $fileName3 . "', '" . $fileName4 . "', '" . $fileName5 . "')";
@@ -175,7 +167,6 @@
                 } else {
                     $delete = "DELETE from PROVISION ORDER BY provision_id DESC limit 1";
                     mysqli_query($mysqli, $delete);
-                    echo ("<script>window.alert('ERROR! IMAGES COULD NOT BE UPLOADED. PRODUCT NOT LISTED.');</script>");
                 }
             }
             ?>

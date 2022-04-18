@@ -47,6 +47,9 @@
         ?>
 
         <form class="products" action="" method="post">
+            <table class="tblproducts">
+                <a id="pendingbtn" href="VIEW LISTING.php">VIEW YOUR LISTING</a>
+            </table>
             <?php
             $checkOrders = mysqli_query($mysqli, "SELECT * FROM ORDERS WHERE provider_id = $user_id");
             while ($rowOrder = mysqli_fetch_array($checkOrders)) {

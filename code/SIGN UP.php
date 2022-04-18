@@ -111,7 +111,6 @@
         && isset($_REQUEST["username"])
         && isset($_REQUEST["user_email"])
         && isset($_REQUEST["user_password"])
-        && isset($_REQUEST["account_type"])
       ) {
         $surname = $_REQUEST['surname'];
         $forename = $_REQUEST['forename'];
@@ -121,7 +120,6 @@
         $username = $_REQUEST['username'];
         $user_email = $_REQUEST['user_email'];
         $user_password = $_REQUEST['user_password'];
-        $account_type = $_REQUEST['account_type'];
       } else {
         $surname = null;
         $forename = null;
@@ -131,7 +129,6 @@
         $username = null;
         $user_email = null;
         $user_password = null;
-        $account_type = null;
       }
 
       if (isset($_REQUEST['create'])) {
@@ -141,7 +138,7 @@
         if ($result->num_rows >= 1) {
           print("<script>window.alert('USERNAME ALREADY EXISTS, PLEASE TRY AGAIN');</script>");
         } else {
-          mysqli_query($mysqli, "INSERT INTO USERS(surname,forename, dob, contact_number, home_address, username, user_password, user_email, creation_date, account_type) VALUES('$surname','$forename', '$dob','$contact_number','$home_address','$username','$user_password','$user_email', NOW() , '$account_type')");
+          mysqli_query($mysqli, "INSERT INTO USERS(surname,forename, dob, contact_number, home_address, username, user_password, user_email, creation_date) VALUES('$surname','$forename', '$dob','$contact_number','$home_address','$username','$user_password','$user_email', NOW())");
           echo ("<script>window.alert('ACCOUNT CREATED');</script>");
         }
       }
