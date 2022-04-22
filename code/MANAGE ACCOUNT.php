@@ -48,23 +48,24 @@
 
         <form class="products" action="" method="post">
             <table class="tblproducts">
-                <a id="pendingbtn" href="VIEW LISTING.php">VIEW YOUR LISTING</a>
-            </table>
-            <?php
-            $checkOrders = mysqli_query($mysqli, "SELECT * FROM ORDERS WHERE provider_id = $user_id");
-            while ($rowOrder = mysqli_fetch_array($checkOrders)) {
-                $rowOrderID = $rowOrder['order_id'];
+                <a id="actionbtn" href="RENTED PRODUCTS.php">RENTED PRODUCTS</a>
+                <a id="actionbtn" href="VIEW LISTING.php">VIEW YOUR LISTING</a>
+                <?php
+                $checkOrders = mysqli_query($mysqli, "SELECT * FROM ORDERS WHERE provider_id = $user_id");
+                while ($rowOrder = mysqli_fetch_array($checkOrders)) {
+                    $rowOrderID = $rowOrder['order_id'];
 
-                $selectCollection = mysqli_query($mysqli, "SELECT * FROM COLLECTION WHERE order_id = $rowOrderID AND collection_status LIKE 'PENDING'");
-                if (mysqli_fetch_array($selectCollection) > 0) {
-            ?>
-                    <table class="tblproducts">
-                        <a id="pendingbtn" href="MANAGE PENDING ORDERS.php">REVIEW PENDING ORDERS</a>
-                    </table>
-            <?php
+                    $selectCollection = mysqli_query($mysqli, "SELECT * FROM COLLECTION WHERE order_id = $rowOrderID AND collection_status LIKE 'PENDING'");
+                    if (mysqli_fetch_array($selectCollection) > 0) {
+                ?>
+
+                        <a id="actionbtn" href="MANAGE PENDING ORDERS.php">REVIEW PENDING REQUETS</a>
+
+                <?php
+                    }
                 }
-            }
-            ?>
+                ?>
+            </table>
             <?php
             $result = mysqli_query($mysqli, "SELECT * FROM ORDERS WHERE consumer_id = $user_id");
             if (mysqli_fetch_array($result) == 0) {
@@ -140,6 +141,7 @@
                     <th>COLLECTION DATE/TIME</th>
                     <th>PERIOD</th>
                     <th>COST</th>
+                    <th>RETURN BY</th>
                     <th>CONTACT PROVIDER</th>
 
                     <?php
@@ -177,6 +179,14 @@
                                 }
                                 ?>
                                 <td><?php echo "£" . $rowOrder['cost']; ?></td>
+                                <td>
+                                    <p id="returnDate">return date unvailable</p>
+                                    <script>
+                                        collection_date = new Date("<?php echo $rowCollection['collection_datetime'] ?>");
+                                        days = "<?php echo $rowOrder['unit_amount'] ?>";
+                                        calculateDate(collection_date, days);
+                                    </script>
+                                </td>
                                 <td><?php echo $rowUser['user_email']; ?></td>
 
                             </tr>

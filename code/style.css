@@ -759,7 +759,7 @@ input {
 
 /* -------------------------------------- MANAGE ACCOUNT ----------------------------------------- */
 
-#pendingbtn {
+#actionbtn {
   background-image: linear-gradient(-180deg, #00D775, #00BD68);
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
@@ -769,9 +769,10 @@ input {
   float: right;
   text-decoration: none;
   margin-bottom: 1em;
+  margin-left: 1em;
 }
 
-#pendingbtn:hover {
+#actionbtn:hover {
   background: #00bd68;
 }
 

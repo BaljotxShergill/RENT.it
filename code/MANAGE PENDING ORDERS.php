@@ -47,13 +47,16 @@
         ?>
 
         <form class="products" action="" method="post">
-            <table class="tblproducts">
+            <table class="tblproducts" style="font-size: 80%;">
                 <h1 class="searchres">PENDING ORDERS:</h1>
                 <br>
-                <th>PRODUCT ID</th>
-                <th>ORDER ID</th>
+                <th>REQUEST DATE</th>
+                <th>PRODUCT</th>
                 <th>COLLECTION ADDRESS</th>
                 <th>COLLECTION DATE/TIME</th>
+                <th>FOR</th>
+                <th>RETURN DATE</th>
+                <th>AMOUNT</th>
                 <th>COLLECTION STATUS</th>
                 <th></th>
                 <th></th>
@@ -68,14 +71,32 @@
                     while ($rowCollection = mysqli_fetch_array($selectCollection)) {
                 ?>
                         <tr>
+                            <td><?php echo $rowOrder['request_date']; ?></td>
                             <td>
                                 <button type="submit" name="viewProduct" class="btnID" value="<?php echo $rowCollection['provision_id']; ?>">
-                                    <?php echo $rowCollection['provision_id']; ?>
+                                    <?php echo "VIEW" ?>
                                 </button>
                             </td>
-                            <td><?php echo $rowCollection['order_id']; ?></td>
                             <td><?php echo $rowCollection['collection_address']; ?></td>
                             <td><?php echo $rowCollection['collection_datetime']; ?></td>
+                            <td>
+                                <?php
+                                if ($rowOrder['unit_amount'] > 1) {
+                                    echo $rowOrder['unit_amount'] . " days";
+                                } else {
+                                    echo $rowOrder['unit_amount'] . " day";
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <p id="returnDate">return date unvailable</p>
+                                <script>
+                                    collection_date = new Date("<?php echo $rowCollection['collection_datetime'] ?>");
+                                    days = "<?php echo $rowOrder['unit_amount'] ?>";
+                                    calculateDate(collection_date, days);
+                                </script>
+                            </td>
+                            <td><?php echo "£" . $rowOrder['cost']; ?></td>
                             <td><?php echo $rowCollection['collection_status']; ?></td>
                             <td>
                                 <button type="submit" name="approveOrder" class="btnID" style="color: green;" value="<?php echo $rowCollection['collection_id']; ?>">
