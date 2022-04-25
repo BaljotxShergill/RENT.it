@@ -143,6 +143,7 @@
                     <th>COST</th>
                     <th>RETURN BY</th>
                     <th>CONTACT PROVIDER</th>
+                    <th>INVOICE </th>
 
                     <?php
                     $selectOrders = mysqli_query($mysqli, "SELECT * FROM ORDERS WHERE consumer_id = $user_id");
@@ -188,6 +189,13 @@
                                     </script>
                                 </td>
                                 <td><?php echo $rowUser['user_email']; ?></td>
+                                <td>
+                                    <button type="submit" name="print" class="btnID">
+                                        PRINT
+                                        <?php include("INVOICE.php"); ?>
+                                    </button>
+
+                                </td>
 
                             </tr>
                         <?php
