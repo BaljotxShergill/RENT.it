@@ -80,7 +80,7 @@
 
           <div class="form-element">
             <label for="user_password1"><b>COMFIRM PASSWORD</b></label>
-            <input type="password" placeholder="Repeat Password" name="user_password1" onkeyup='check();' required />
+            <input type="password" placeholder="Repeat Password" name="user_password1" required />
           </div>
         </div>
 
@@ -111,15 +111,25 @@
         && isset($_REQUEST["username"])
         && isset($_REQUEST["user_email"])
         && isset($_REQUEST["user_password"])
+        && isset($_REQUEST["user_password1"])
       ) {
         $surname = $_REQUEST['surname'];
         $forename = $_REQUEST['forename'];
         $dob = date('Y-m-d', strtotime($_REQUEST['dob']));
+        if (time() < strtotime('+18 years', strtotime($dob))) {
+          echo ("<script>window.alert('YOU MUST BE OVER 18 TO REGISTER.');</script>");
+          exit;
+        }
         $contact_number = $_REQUEST['contact_number'];
         $home_address = $_REQUEST['home_address'];
         $username = $_REQUEST['username'];
         $user_email = $_REQUEST['user_email'];
+        if ($_REQUEST['user_password'] != $_REQUEST['user_password1']) {
+          echo ("<script>window.alert('PASSWORD DO NOT MATCH.');</script>");
+          exit;
+        }
         $user_password = $_REQUEST['user_password'];
+        $user_password = md5($user_password);
       } else {
         $surname = null;
         $forename = null;
@@ -129,10 +139,10 @@
         $username = null;
         $user_email = null;
         $user_password = null;
+        $user_password1 = null;
       }
 
       if (isset($_REQUEST['create'])) {
-
         $result = mysqli_query($mysqli, "SELECT * FROM USERS WHERE username='$username' OR user_email='$user_email'");
 
         if ($result->num_rows >= 1) {

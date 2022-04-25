@@ -23,19 +23,6 @@ function clickimg(smallImg) {
   fullImg.src = smallImg.src;
 }
 
-function check() {
-  if (
-    document.getElementById("user_password").value ==
-    document.getElementById("user_password1").value
-  ) {
-    document.getElementById("message").style.color = "green";
-    document.getElementById("message").innerHTML = "matching";
-  } else {
-    document.getElementById("message").style.color = "red";
-    document.getElementById("message").innerHTML = "not matching";
-  }
-}
-
 function calculateAmount(val) {
   var tot_price = cost_per_day * val;
   /*display the result*/

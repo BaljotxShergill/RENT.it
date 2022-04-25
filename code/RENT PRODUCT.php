@@ -166,6 +166,7 @@
                     $billing_address = $_REQUEST["billing_address"];
                     $expiry_date = date('Y-m-d', strtotime($_REQUEST['expiry_date']));
                     $card_number = $_REQUEST["card_number"];
+                    $card_number = md5($card_number);
                     $cvv = $_REQUEST["cvv"];
                 } else {
                     $collection_date = date("Y-m-d h:i:sa");

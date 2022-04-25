@@ -42,6 +42,7 @@
   if (isset($_REQUEST["username"]) && isset($_REQUEST["user_password"])) {
     $username_User = mysqli_real_escape_string($mysqli, $_REQUEST["username"]);
     $password_User = mysqli_real_escape_string($mysqli, $_REQUEST["user_password"]);
+    $password_User = md5($password_User);
   } else {
     $username_User = null;
     $password_User = null;
@@ -49,7 +50,6 @@
 
   if (isset($_REQUEST['submit'])) {
     // Run SQL query
-    echo ("<script>window.alert($username_User, $password_User);</script>");
     $res = mysqli_query($mysqli, "SELECT * FROM USERS WHERE username='$username_User' AND user_password='$password_User'");
     $row = mysqli_fetch_array($res);
     if ($res->num_rows == 1) {
