@@ -22,7 +22,7 @@
         <li><a href="index.php">HOME</a></li>
         <li><a href="LEND.php">LEND</a></li>
         <li><a href="PRODUCTS.php">RENT</a></li>
-        <li><a href="HELP.php">HELP</a></li>
+        <li><a href="HELP.php">ABOUT US</a></li>
         <?php
 
         if (isset($_SESSION["user"])) {
